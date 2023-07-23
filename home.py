@@ -53,8 +53,16 @@ def parser(link):
     tags = soup.findAll('img')
     for match in tags:
         match.decompose()
+    tags = soup.findAll('picture')
+    for match in tags:
+        match.decompose()
+    tags = soup.findAll('head')
+    for match in tags:
+        match.decompose()
+    tags = soup.findAll('header')
+    for match in tags:
+        match.decompose()
     
-    st.write(str(soup))
     if str(soup.find('article')) != 'None':
         main = soup.find('article')
     elif str(soup.find('main')) != 'None':
