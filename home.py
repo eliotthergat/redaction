@@ -140,7 +140,7 @@ if submit:
             col1.info("2/9 - Analyse de l'article...")
             response_1 = concurrent_analyzer(text_1)
             with col2.expander("Analyse n°1", expanded=False):
-                st.write(response_1)
+                st.write(response_1) 
             
             st.markdown("### Traitement du 2ème article...")
             col1, col2 = st.columns([1, 2])
