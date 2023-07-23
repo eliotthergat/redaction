@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 import markdownify
 from time import perf_counter
 from streamlit_pills import pills
+import trafilatura
 
 from components.sidebar import sidebar
 
@@ -29,6 +30,7 @@ st.markdown("### Rédigeons de meilleures pages que les concurrents 👀")
 
 suggestion = pills("", ["Pas de suggestions", "Avec suggestions"], ["🚫", "🎉"])
 with st.expander("Concurrence", expanded=False):
+    link_1 = st.text_input("Concurrent n°1", placeholder="Lien")
     text_1 = st.text_area("Concurrent n°1", placeholder="Contenu")
     text_2 = st.text_area("Concurrent n°2", placeholder="Contenu")
     text_3 = st.text_area("Concurrent n°3", placeholder="Contenu")
@@ -120,6 +122,11 @@ def better_titles(text, infos):
     return response["choices"][0]["message"]["content"]
     
 if submit:
+
+    downloaded = trafilatura.fetch_url(link_1)
+    text_bis = trafilatura.extract(downloaded)
+    st.write(text_bis)
+
     with st.spinner("Requête en cours..."):
             ts_start = perf_counter()
 
