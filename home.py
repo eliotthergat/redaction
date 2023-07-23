@@ -134,9 +134,11 @@ if submit:
     footer = soup.find('footer')
     # Remove footer element
     footer.decompose()
+
+    main = soup.find('header')
     
     # Get cleaned HTML string
-    cleaned_html = str(soup)
+    cleaned_html = str(main)
     st.write(cleaned_html)
 
     with st.spinner("Requête en cours..."):
