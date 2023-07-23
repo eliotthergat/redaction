@@ -11,7 +11,6 @@ st.set_page_config(
 
 
 st.header("🖊️ Khlinic writer")
-st.markdown("Un peu d'IA pour gagner beaucoup de 💸")
 st.markdown("---")
 
 if "shared" not in st.session_state:
