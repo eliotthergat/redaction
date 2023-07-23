@@ -62,7 +62,7 @@ def parser(link):
     tags = soup.findAll('header')
     for match in tags:
         match.decompose()
-    tags = soup.findAll('a')
+    tags = soup.findAll('script')
     for match in tags:
         match.decompose()
     
