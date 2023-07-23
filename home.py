@@ -123,7 +123,7 @@ def better_titles(text, infos):
     
 if submit:
 
-    downloaded = trafilatura.fetch_url(link_1)
+    downloaded = trafilatura.fetch_url('https://www.crpce.com/chirurgie-esthetique/chirurgie-visage')
     text_bis = trafilatura.extract(downloaded)
     st.write(text_bis)
 
