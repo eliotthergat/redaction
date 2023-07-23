@@ -16,6 +16,4 @@ with st.sidebar:
         type="password",
         placeholder="Paste your OpenAI API key here (sk-...)",
         help="Needed to use the OpenAI API",  # noqa: E501
-        value=os.environ.get("OPENAI_API_KEY", None)
-        or st.session_state.get("OPENAI_API_KEY", ""),
     )
