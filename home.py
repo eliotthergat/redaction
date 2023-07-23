@@ -94,7 +94,7 @@ def markdown_generator(text):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": "À partir du code HTML suivant, extrais l'article principal sous format markdown. Ne conserve que les H1, H2, H3, H4, H5, H6, les paragraphes et les listes contenues dans le corps principal de l'article."},
+        messages=[{"role": "system", "content": "À partir du code HTML suivant, extraies l'article principal sous format markdown. Ne conserve que les H1, H2, H3, H4, H5, H6, les paragraphes et les listes contenues dans le corps principal de l'article. Supprime les sections à lire également, catégories, etc..."},
                         {"role": "user", "content": text}]
     )
     return response["choices"][0]["message"]["content"]
