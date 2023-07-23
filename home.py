@@ -24,7 +24,7 @@ with st.expander("Concurrence", expanded=True):
     link_1 = st.text_input("Lien 1", placeholder="Lien concurrent #1")
     link_2 = st.text_input("Lien 2", placeholder="Lien concurrent #2")
     link_3 = st.text_input("Lien 3", placeholder="Lien concurrent #3")
-    col1, col2, col3 = st.columns([1, 1,1])
+    col1, col2, col3 = st.columns([2, 2,1])
     submit = col3.button("Scrapper 🏴‍☠️")
 
 
