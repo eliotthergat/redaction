@@ -1,6 +1,6 @@
 !pip install openai
 import os
-import openai
+import openai==latest
 import streamlit as st
 
 st.set_page_config(
