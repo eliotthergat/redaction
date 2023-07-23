@@ -28,5 +28,5 @@ with st.expander("Concurrence", expanded=True):
     col1, col2, col3 = st.columns([2, 2,1])
     submit = col3.button("Scrapper 🏴‍☠️", use_container_width=1)
 if submit:
-    st.alert("Test")
+    st.success("Test")
 
