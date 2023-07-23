@@ -38,6 +38,7 @@ with st.expander("Plan de contenu", expanded=True):
 
 
 suggestion = pills("", ["Pas de suggestions", "Avec suggestions"], ["🚫", "🎉"])
+col1, col2, col3 = st.columns([2, 2,1])
 submit = col3.button("Rédiger ✍🏻", use_container_width=1)
 
 def parser(link):
