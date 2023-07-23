@@ -1,4 +1,3 @@
-!pip install openai
 import os
 import openai==latest
 import streamlit as st
