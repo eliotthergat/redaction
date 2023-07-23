@@ -3,6 +3,7 @@ import openai
 import streamlit as st
 import requests
 from bs4 import BeautifulSoup
+import markdownify
 
 from components.sidebar import sidebar
 
@@ -42,4 +43,4 @@ if submit:
     for t in text:
         if t.parent.name not in blacklist:
             output += '{} '.format(t)
-    st.write(output)
+    st.write(text)
