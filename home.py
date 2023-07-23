@@ -52,9 +52,9 @@ def parser(link):
     soup = BeautifulSoup(html_page, 'html.parser')
     
     
-    soup = soup.find('body')
-    soup = soup.find('main')
-    soup = soup.extract('div')
+    main = soup.find('body')
+    main = main.find('main')
+    main = main.extract('div')
     
     cleaned_html = str(main)
     st.write(cleaned_html)
