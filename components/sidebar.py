@@ -45,6 +45,6 @@ def sidebar():
         st.markdown("---")
         st.markdown("# À propos")
         st.markdown(
-            "📖 Tous les crédits vont à Khlinic. "
+            "📖 Tous les crédits appartiennent à Khlinic. "
         )
         
