@@ -53,7 +53,7 @@ def parser(link):
     
     main = soup.find('body')
     main = main.find('main')
-    main = soup.findAll('a')
+    main = main.findAll('a')
     for match in main:
         match.decompose()
     
