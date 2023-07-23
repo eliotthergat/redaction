@@ -6,7 +6,7 @@ st.set_page_config(
     page_icon="✍🏻",
 )
 with st.sidebar:
-    image = Image.open('assets/logo.svg')
+    image = Image.open('assets/logo.png')
     st.image(image)
     st.markdown(
             "## How to use\n"
