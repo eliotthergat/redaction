@@ -33,12 +33,12 @@ def sidebar():
         temperature = st.slider("Température (`randomness`):", min_value=0.0, max_value=2.0, value=st.session_state.get("TEMPERATURE", 1.0), step=0.1, help="###")
         st.session_state["TEMPERATURE"] = temperature
 
-        presence_penalty = st.slider("Température (`presence_penalty`):", min_value=0.0, max_value=2.0, value=st.session_state.get("PRESENCE_PENALTY", 1.0), step=0.1, help="###")
+        presence_penalty = st.slider("Pénalité de présence (`presence_penalty`):", min_value=0.0, max_value=2.0, value=st.session_state.get("PRESENCE_PENALTY", 1.0), step=0.1, help="###")
         st.session_state["PRESENCE_PENALTY"] = presence_penalty
 
-        
-        #PARAMS["presence_penalty"] = st.slider("Pénalité de présence (`presence_penalty`)", min_value=0.0, max_value=2.0, value=0, step=0.1)
-        #PARAMS["frequency_penalty"] = st.slider("Pénalité de fréquence (`frequence_penalty`)", min_value=0.0, max_value=2.0, value=0, step=0.1)
+        frequency_penalty = st.slider("Pénalité de fréquence (`frequency_penalty`):", min_value=0.0, max_value=2.0, value=st.session_state.get("FREQUENCY_PENALTY", 1.0), step=0.1, help="###")
+        st.session_state["FREQUENCY_PENALTY"] = frequency_penalty
+
         st.markdown("---")
         st.markdown("# À propos")
         st.markdown(
