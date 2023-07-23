@@ -12,7 +12,7 @@ def sidebar():
         st.markdown(
                 "## Comment fonctionne l'outil ?\n"
                 "1. 🔑 Entrez une clé OpenAI \n"
-                "2. 🏴‍☠️ Choisissez les textes à analyser 🏴‍☠️\n"
+                "2. 🏴‍☠️ Choisissez les textes à analyser \n"
                 "3. 🏆 Entrez le titre \n"
                 "4. 🗺️ Entrez le plan \n"
                 "5. 🦜 Entrez les mots-clés \n"
