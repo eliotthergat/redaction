@@ -71,7 +71,7 @@ def concurrent_sumerizer(response_1, response_2, response_3):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecine. Reprends toutes les informations médicales, physiologiques, biologiques, anatomiques, les conseils et fais une liste de ces informations. Cette liste servira à la rédaction d'un article complet sur le sujet, n'oublie pas d'information et sois exhaustif. Conserve l'ensemble des détails. Voici les textes à analyser :"},
+        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Remets toutes les informations contenues dans les textes 1, 2 et 3 sous forme d'une seule liste complète."},
                         {"role": "user", "content": "[TEXTE 1 : ]\n" + response_1 + "\n [TEXTE 2 : ]\n" + response_2 + "\n [TEXTE 3 : ]\n" + response_3}]
     )
     return response["choices"][0]["message"]["content"]
