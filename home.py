@@ -135,7 +135,7 @@ if submit:
     # Remove footer element
     footer.decompose()
 
-    main = soup.find('header')
+    main = soup.find('main')
     
     # Get cleaned HTML string
     cleaned_html = str(main)
