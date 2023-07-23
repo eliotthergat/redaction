@@ -57,6 +57,7 @@ def parser(link):
     main = soup.picture.extract()
     main = soup.a.extract()
     main = soup.svg.extract()
+    main = soup.noscript.extract()
     
     main = soup.find('main')
     cleaned_html = str(main)
