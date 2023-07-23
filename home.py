@@ -58,6 +58,7 @@ def parser(link):
         return ' '.join(soup.stripped_strings)
         
     soup = remove_tags(soup)
+    st.write(soup)
     if str(soup.find('article')) != 'None':
         main = soup.find('article')
     elif str(soup.find('main')) != 'None':
