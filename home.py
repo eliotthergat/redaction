@@ -24,7 +24,7 @@ sidebar()
 
 openai.api_key = st.session_state.get("OPENAI_API_KEY")
 
-st.markdown("### Rédigeons les de meilleures pages que les concurrents 👀")
+st.markdown("### Rédigeons de meilleures pages que les concurrents 👀")
 with st.expander("Concurrence", expanded=True):
     text_1 = st.text_area("Concurrent n°1", placeholder="Contenu")
     text_2 = st.text_area("Concurrent n°2", placeholder="Contenu")
