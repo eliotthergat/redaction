@@ -184,7 +184,7 @@ if submit:
                 file_name='texte.md',
                 mime='text/markdown',
             )
-            if suggestion = "Avec suggestions":
+            if suggestion == "Avec suggestions":
                 st.warning("Proposition de titres en cours...")
                 titles_to_add = better_titles(final_text, infos)
                 with st.expander("Titres à réviser", expanded=False):
