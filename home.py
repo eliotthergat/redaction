@@ -4,6 +4,7 @@ import streamlit as st
 import requests
 from bs4 import BeautifulSoup
 import markdownify
+from time import perf_counter
 
 from components.sidebar import sidebar
 
@@ -58,7 +59,13 @@ def concurrent_analyzer(text):
     )
     return response["choices"][0]["message"]["content"]
 if submit:
-    st.success("Test")
-    text_1 = parser(link_1)
-    response_1 = concurrent_analyzer(text_1)
-    st.write(response_1)
+    with st.spinner("Requête en cours..."):
+            ts_start = perf_counter()
+        
+            st.info("Analyse du premier article")
+            text_1 = parser(link_1)
+            response_1 = concurrent_analyzer(text_1)
+            st.write(response_1)
+
+            ts_end = perf_counter()
+            st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
