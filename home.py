@@ -20,6 +20,7 @@ sidebar()
 
 openai_api_key = st.session_state.get("OPENAI_API_KEY")
 
+st.markdown("### Dans un premier temps, allons explorer les meilleures pages des concurrents")
 with st.expander("Concurrence", expanded=True):
     link_1 = st.text_input("Lien 1", placeholder="Lien concurrent #1")
     link_2 = st.text_input("Lien 2", placeholder="Lien concurrent #2")
