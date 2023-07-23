@@ -7,10 +7,11 @@ st.set_page_config(
 with st.sidebar:
     st.image('assets/logo.svg')
     st.markdown(
-            "## How to use\n"
-            "1. Enter your [OpenAI API key](https://platform.openai.com/account/api-keys) below🔑\n"  # noqa: E501
-            "2. Upload a pdf, docx, or txt file📄\n"
-            "3. Ask a question about the document💬\n"
+            "## Comment fonctionne l'outil ?\n"
+            "1. Entrez une clé OpenAI\n"
+            "2. Choisissez les liens à explorer\n"
+            "3. Entrez le plan\n"
+            "4. Entrez les mots-clés\n"
         )
     api_key_input = st.text_input(
         "OpenAI API Key",
