@@ -21,3 +21,4 @@ with st.sidebar:
         placeholder="Paste your OpenAI API key here",
         help="Needed to use the OpenAI API"
     )
+    st.markdown("---")
