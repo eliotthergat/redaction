@@ -86,6 +86,19 @@ def parser(link):
     cleaned_html = str(main)
     markdown_text = markdownify.markdownify(cleaned_html)
     return markdown_text
+def markdown_generator(text):
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        temperature=st.session_state.get("TEMPERATURE"),
+        max_tokens=st.session_state.get("MAX_TOKENS"),
+        top_p=1,
+        frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
+        presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
+        messages=[{"role": "system", "content": "À partir du code HTML suivant, extrais l'article principal sous format markdown. Ne conserve que les H1, H2, H3, H4, H5, H6, les paragraphes et les listes contenues dans le corps principal de l'article."},
+                        {"role": "user", "content": text}]
+    )
+    return response["choices"][0]["message"]["content"]
+    
 def concurrent_analyzer(text):
     response = openai.ChatCompletion.create(
         model="gpt-4",
@@ -161,7 +174,7 @@ if submit:
             col1.info("1/9 - Scrapping de l'article...")
             text_1 = parser(link_1)
             with col2.expander("Texte n°1", expanded=False):
-                st.write(text_1)
+                st.write(markdown_generator(text_1))
         
             col1, col2 = st.columns([1, 2])
             col1.info("2/9 - Analyse de l'article...")
