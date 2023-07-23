@@ -1,5 +1,5 @@
 import os
-import openai=0.27.8
+import openai
 import streamlit as st
 
 st.set_page_config(
