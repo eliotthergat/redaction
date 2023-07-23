@@ -126,7 +126,7 @@ if submit:
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
     text_extract = soup.find_all(text=True)
-    st.write(text_textract)
+    st.write(text_extract)
 
     with st.spinner("Requête en cours..."):
             ts_start = perf_counter()
