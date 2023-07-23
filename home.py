@@ -94,7 +94,7 @@ def markdown_generator(text):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": "À partir du code markdown suivant, extraies l'article principal sous format markdown. Ne conserve que les H1, H2, H3, H4, H5, H6, les paragraphes et les listes contenues dans le corps principal de l'article. Supprime les sections à lire également, catégories, les crédits, etc..."},
+        messages=[{"role": "system", "content": "À partir du code markdown suivant, extraies l'article principal sous format markdown. Ne conserve que les H1, H2, H3, H4, H5, H6, les paragraphes et les listes contenues dans le corps principal de l'article. Supprime le contenu avec le H1, les sections à lire également, les sections photos et avants/après, catégories, les crédits, etc..."},
                         {"role": "user", "content": text}]
     )
     return response["choices"][0]["message"]["content"]
@@ -231,25 +231,21 @@ if submit:
             with st.expander("Synthèse", expanded=False):
                 st.write(infos)
 
-            st.warning("11/12 - Rédaction du premier jet...")
+            st.success("11/12 - Rédaction du premier texte...")
             first_text = writer(infos, title, plan, keywords)
             with st.expander("Texte brut", expanded=False):
                 st.write(first_text)
 
-            st.success("12/12 - Amélioration à partir des mots-clés...")
-            final_text = better_keywords(first_text, keywords)
-            with st.expander("Texte final", expanded=False):
-                    st.write(final_text)
 
             col1, col2, col3 = st.columns([2, 2,1])
             col3.download_button(
                 label="Télécharger 💾",
-                data=final_text,
+                data=first_text,
                 file_name='texte.md',
                 mime='text/markdown',
             )
             if suggestion == "Avec suggestions":
-                st.warning("Proposition de titres en cours...")
+                st.warning("12/12 - Proposition de titres en cours...")
                 titles_to_add = better_titles(final_text, infos)
                 with st.expander("Titres à réviser", expanded=False):
                         st.write(titles_to_add)
