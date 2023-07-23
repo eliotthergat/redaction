@@ -5,7 +5,7 @@ st.set_page_config(
     page_icon="✍🏻",
 )
 with st.sidebar:
-    st.image('assets/logo.png')
+    st.image('assets/logo.svg')
     st.markdown(
             "## How to use\n"
             "1. Enter your [OpenAI API key](https://platform.openai.com/account/api-keys) below🔑\n"  # noqa: E501
