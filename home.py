@@ -123,13 +123,15 @@ if submit:
     with st.spinner("Requête en cours..."):
             ts_start = perf_counter()
         
-            st.info("1/10 - Traitement du 1er article...")
+            st.markdown("### Traitement du 1er article...")
+            col1, col2 = st.columns([1, 2])
+            col1.info("1/10 - Scrapping de l'article...")
             text_1 = parser(link_1)
-            with st.expander("Texte n°1", expanded=False):
+            with col2.expander("Texte n°1", expanded=False):
                 st.write(text_1)
         
             col1, col2 = st.columns([1, 2])
-            col1.info("2/10 - Analyse du premier article...")
+            col1.info("2/10 - Analyse de l'article...")
             response_1 = concurrent_analyzer(text_1)
             with col2.expander("Analyse n°1", expanded=False):
                 st.write(response_1)
