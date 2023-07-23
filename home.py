@@ -89,7 +89,7 @@ def writer(infos, title, plan, keywords):
     )
     return response["choices"][0]["message"]["content"]
     
-def better_keyword(text, keywords):
+def better_keywords(text, keywords):
     response = openai.ChatCompletion.create(
         model="gpt-4",
         temperature=st.session_state.get("TEMPERATURE"),
@@ -148,19 +148,19 @@ if submit:
                 st.write(first_text)
 
             st.success("6/7 - Amélioration à partir des mots-clés...")
-            final_text = better_keywords(first_revision, keywords)
+            final_text = better_keywords(first_text, keywords)
             with st.expander("Texte final", expanded=False):
                     st.write(final_text)
 
             col1, col2, col3 = st.columns([2, 2,1])
             col3.download_button(
-                label="Télécharger le texte",
+                label="Télécharger 💾",
                 data=final_text,
                 file_name='texte.md',
                 mime='text/markdown',
             )
 
-            st.info("7/7 - Proposition de titres en cours...")
+            st.warning("7/7 - Proposition de titres en cours...")
             titles_to_add = better_titles(final_text, infos)
             with st.expander("Titres à réviser", expanded=False):
                     st.write(titles_to_add)
