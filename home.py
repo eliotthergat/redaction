@@ -26,9 +26,9 @@ openai.api_key = st.session_state.get("OPENAI_API_KEY")
 
 st.markdown("### Allons explorer les meilleures pages des concurrents 👀")
 with st.expander("Concurrence", expanded=True):
-    text_1 = st.text_area("Texte 1", placeholder="Lien concurrent #1")
-    text_2 = st.text_area("Texte 2", placeholder="Lien concurrent #2")
-    text_3 = st.text_area("Texte 3", placeholder="Lien concurrent #3")
+    text_1 = st.text_area("Concurrent n°1", placeholder="Contenu")
+    text_2 = st.text_area("Concurrent n°2", placeholder="Contenu")
+    text_3 = st.text_area("Concurrent n°3", placeholder="Contenu")
     col1, col2, col3 = st.columns([2, 2,1])
     submit = col3.button("Scrapper 🏴‍☠️", use_container_width=1)
 
@@ -65,7 +65,18 @@ if submit:
         
             st.info("Analyse du premier article")
             response_1 = concurrent_analyzer(text_1)
-            st.write(response_1)
+            with st.expander("Analyse n°1", expanded=False):
+                st.write(response_1)
+                
+            st.info("Analyse du second article")
+            response_2 = concurrent_analyzer(text_2)
+            with st.expander("Analyse n°2", expanded=False):
+                st.write(response_2)
+
+            st.info("Analyse du troisième article")
+            response_3 = concurrent_analyzer(text_3)
+            with st.expander("Analyse n°3", expanded=False):
+                st.write(response_3)
 
             ts_end = perf_counter()
             st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
