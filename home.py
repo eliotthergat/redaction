@@ -27,11 +27,11 @@ openai.api_key = st.session_state.get("OPENAI_API_KEY")
 
 st.markdown("### Rédigeons de meilleures pages que les concurrents 👀")
 
-with st.expander("Concurrence", expanded=True):
+with st.expander("Concurrence", expanded=False):
     text_1 = st.text_area("Concurrent n°1", placeholder="Contenu")
     text_2 = st.text_area("Concurrent n°2", placeholder="Contenu")
     text_3 = st.text_area("Concurrent n°3", placeholder="Contenu")
-with st.expander("Plan de contenu", expanded=True):
+with st.expander("Plan de contenu", expanded=False):
     title = st.text_input("Titre", placeholder="Le titre de l'article")
     plan = st.text_area("Plan", placeholder="Le plan de l'article")
     keywords = st.text_area("Mots-clés", placeholder="Les mots-clés à utiliser")
