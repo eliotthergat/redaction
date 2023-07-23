@@ -50,14 +50,10 @@ def parser(link):
     res = requests.get(link)
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
+    tags = soup.findAll('img')
+        for match in tags:
+          match.decompose()
     
-    def remove_tags(soup):
-        for data in soup(['style', 'script', 'img', 'picture', 'a']):
-            # Remove tags
-            data.decompose()
-        return data
-        
-    soup = remove_tags(soup)
     st.write(soup)
     if str(soup.find('article')) != 'None':
         main = soup.find('article')
