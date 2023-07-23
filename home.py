@@ -1,6 +1,8 @@
 import os
 import openai
 import streamlit as st
+import requests
+from bs4 import BeautifulSoup
 
 from components.sidebar import sidebar
 
