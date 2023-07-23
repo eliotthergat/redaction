@@ -55,7 +55,7 @@ def parser(link):
         for data in soup(['style', 'script', 'img', 'picture', 'a']):
             # Remove tags
             data.decompose()
-        return ' '.join(soup)
+        return data
         
     soup = remove_tags(soup)
     st.write(soup)
