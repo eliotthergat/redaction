@@ -14,6 +14,6 @@ with st.sidebar:
     api_key_input = st.text_input(
         "OpenAI API Key",
         type="password",
-        placeholder="Paste your OpenAI API key here (sk-...)",
-        help="Needed to use the OpenAI API",  # noqa: E501
+        placeholder="Paste your OpenAI API key here",
+        help="Needed to use the OpenAI API"
     )
