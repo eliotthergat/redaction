@@ -7,7 +7,6 @@ st.set_page_config(
     page_icon="🖋",
 )
 
-add_logo("assets/logo_black.png", height=50)
 
 st.write("# L'écriture d'article 🖋")
 st.markdown(
