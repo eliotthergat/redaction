@@ -11,11 +11,11 @@ with st.sidebar:
             "2. Upload a pdf, docx, or txt file📄\n"
             "3. Ask a question about the document💬\n"
         )
-        api_key_input = st.text_input(
-            "OpenAI API Key",
-            type="password",
-            placeholder="Paste your OpenAI API key here (sk-...)",
-            help="Needed to use the OpenAI API",  # noqa: E501
-            value=os.environ.get("OPENAI_API_KEY", None)
-            or st.session_state.get("OPENAI_API_KEY", ""),
-        )
+    api_key_input = st.text_input(
+        "OpenAI API Key",
+        type="password",
+        placeholder="Paste your OpenAI API key here (sk-...)",
+        help="Needed to use the OpenAI API",  # noqa: E501
+        value=os.environ.get("OPENAI_API_KEY", None)
+        or st.session_state.get("OPENAI_API_KEY", ""),
+    )
