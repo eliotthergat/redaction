@@ -65,8 +65,9 @@ if submit:
         
             st.info("Analyse du premier article")
             text_1 = parser(link_1)
-            response_1 = concurrent_analyzer(text_1)
-            st.write(response_1)
+            st.write(text_1)
+            # response_1 = concurrent_analyzer(text_1)
+            # st.write(response_1)
 
             ts_end = perf_counter()
             st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
