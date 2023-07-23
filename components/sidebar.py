@@ -26,3 +26,7 @@ def sidebar():
         )
         st.session_state["OPENAI_API_KEY"] = api_key_input
         st.markdown("---")
+        st.markdown("# À propos")
+        st.markdown(
+            "📖 Tous les crédits vont à Khlinic. "
+        )
