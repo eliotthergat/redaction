@@ -6,7 +6,6 @@ from bs4 import BeautifulSoup
 import markdownify
 from time import perf_counter
 from streamlit_pills import pills
-import trafilatura
 
 from components.sidebar import sidebar
 
@@ -125,8 +124,9 @@ if submit:
 
     res = requests.get(link_1)
     html_page = res.content
-    text_bis = trafilatura.extract(html_page)
-    st.write(text_bis)
+    soup = BeautifulSoup(html_page, 'html.parser')
+    text_extract = soup.find_all(text=True)
+    st.write(text_textract)
 
     with st.spinner("Requête en cours..."):
             ts_start = perf_counter()
