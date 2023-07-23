@@ -110,13 +110,13 @@ if submit:
                 
             st.info("Synthèse des connaissances acquises...")
             infos = concurrent_sumerizer(response_1, response_2, response_3)
-            with st.expander("Analyse n°3", expanded=False):
+            with st.expander("Synthèse", expanded=False):
                 st.write(infos)
 
             st.info("Rédaction du premier jet...")
             first_text = writer(infos, title, plan, keywords)
             with st.expander("Texte brut", expanded=False):
-                st.write(infos)
+                st.write(first_text)
         
             ts_end = perf_counter()
             st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
