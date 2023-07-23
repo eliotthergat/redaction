@@ -118,21 +118,24 @@ def better_titles(text, infos):
 if submit:
     with st.spinner("Requête en cours..."):
             ts_start = perf_counter()
-        
-            st.info("1/7 - Analyse du premier article...")
+
+            col1, col2 = st.columns([1, 2])
+            col1.info("1/7 - Analyse du premier article...")
             response_1 = concurrent_analyzer(text_1)
-            with st.expander("Analyse n°1", expanded=False):
+            with col2.expander("Analyse n°1", expanded=False):
                 st.write(response_1)
                 
-            st.info("2/7 - Analyse du second article...")
+            col1, col2 = st.columns([1, 2])
+            col1.info("2/7 - Analyse du second article...")
             response_2 = concurrent_analyzer(text_2)
             with st.expander("Analyse n°2", expanded=False):
-                st.write(response_2)
+                col2.write(response_2)
 
-            st.info("3/7 - Analyse du troisième article...")
+            col1, col2 = st.columns([1, 2])
+            col1.info("3/7 - Analyse du troisième article...")
             response_3 = concurrent_analyzer(text_3)
             with st.expander("Analyse n°3", expanded=False):
-                st.write(response_3)
+                col2.write(response_3)
                 
             st.info("4/7 - Synthèse des connaissances acquises...")
             infos = concurrent_sumerizer(response_1, response_2, response_3)
