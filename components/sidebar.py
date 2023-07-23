@@ -32,8 +32,7 @@ def sidebar():
             help="Maximum number of tokens to consume",
             min_value=1,
             max_value=8000,
-            value=os.environ.get("MAX_TOKENS", None)
-            or st.session_state.get("MAX_TOKENS", ""),
+            value=2048
         )
         st.session_state["MAX_TOKENS"] = max_tokens
         
