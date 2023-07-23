@@ -146,7 +146,7 @@ def better_keywords(text, keywords):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecine. Ta tâche est maintenant d’améliorer l’article contenu dans [TEXT] avec les mots-clés contenus dans [KEYWORDS], chaque mot clé est suivi du nombre de fois où il doit apparaitre. Ajoute les mots-clés manquants aux endroits pertinents, sans modifier les titres, les paragraphes ou le sens du contenu. Tu dois améliorer sémantiquement uniquement les paragraphes sans les dénaturer. Ne modifie pas les titres et le plan de l'article."},
+        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecine. Ta tâche est maintenant d’améliorer l’article contenu dans [TEXT] avec les mots-clés contenus dans [KEYWORDS], chaque mot clé est suivi du nombre de fois où il doit apparaitre. Ajoute les mots-clés manquants aux endroits pertinents, sans modifier les titres, les paragraphes ou le sens du contenu. Tu dois améliorer sémantiquement uniquement les paragraphes sans les dénaturer. Chaque paragraphe doit contenir au moins 3 phrases. Ne modifie pas les titres et le plan de l'article."},
                         {"role": "user", "content": "[TEXT : ]\n" + text + "\n [KEYWORDS : ]\n" + keywords}]
     )
     return response["choices"][0]["message"]["content"]
@@ -231,10 +231,15 @@ if submit:
             with st.expander("Synthèse", expanded=False):
                 st.write(infos)
 
-            st.success("11/12 - Rédaction du premier texte...")
+            st.warning("11/12 - Rédaction du premier texte...")
             first_text = writer(infos, title, plan, keywords)
             with st.expander("Texte brut", expanded=False):
                 st.write(first_text)
+
+            st.warning("12/12 - Rédaction du texte optimisé...")
+            final_text = better_keywords(first_text, keywords)
+            with st.expander("Texte finalisé", expanded=False):
+                st.write(final_text)
 
 
             col1, col2, col3 = st.columns([2, 2,1])
@@ -245,7 +250,7 @@ if submit:
                 mime='text/markdown',
             )
             if suggestion == "Avec suggestions":
-                st.warning("12/12 - Proposition de titres en cours...")
+                st.warning("Proposition de titres en cours...")
                 titles_to_add = better_titles(final_text, infos)
                 with st.expander("Titres à réviser", expanded=False):
                         st.write(titles_to_add)
