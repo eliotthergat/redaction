@@ -34,14 +34,5 @@ if submit:
     st.success("Test")
     res = requests.get(link_1)
     html_page = res.content
-    soup = BeautifulSoup(html_page, 'html.parser')
-    text = soup.find_all(text=True)
-    output = ''
-    blacklist = ['[document]','noscript','header','html','meta','head', 'input','script','style', 'noscript'
-        # there may be more elements you don't want, such as "style", etc.
-    ]
-    for t in text:
-        if t.parent.name not in blacklist:
-            output += '{} '.format(t)
-    markdown_text = markdownify.markdownify(text)
+    markdown_text = markdownify.markdownify(html_page)
     st.write(markdown_text)
