@@ -1,6 +1,9 @@
 import os
 import openai
 import streamlit as st
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 def sidebar():
@@ -17,6 +20,9 @@ def sidebar():
             "OpenAI API Key",
             type="password",
             placeholder="Paste your OpenAI API key here",
-            help="Needed to use the OpenAI API"
+            help="Needed to use the OpenAI API",
+            value=os.environ.get("OPENAI_API_KEY", None)
+            or st.session_state.get("OPENAI_API_KEY", ""),
         )
+        st.session_state["OPENAI_API_KEY"] = api_key_input
         st.markdown("---")
