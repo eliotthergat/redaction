@@ -67,7 +67,7 @@ def parser(link):
         match.decompose()
     tags = soup.findAll('a')
     for match in tags:
-        match['href']='#'
+        del match["href"]
     
     if str(soup.find('article')) != 'None':
         main = soup.find('article')
