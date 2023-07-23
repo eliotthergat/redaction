@@ -50,12 +50,10 @@ def parser(link):
     res = requests.get(link)
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
-    main = soup.a.clear()
-    main = soup.picture.clear()
     
     
-    main = soup.find('main')
-    cleaned_html = str(main)
+    main = soup.find('body')
+    cleaned_html = str(body)
     st.write(cleaned_html)
     markdown_text = markdownify.markdownify(cleaned_html)
     return markdown_text
