@@ -6,7 +6,7 @@ st.set_page_config(
     page_title="Accueil - Khlinic",
     page_icon="✍🏻",
 )
-add_logo("assets/logo_black.png", height=50)
+# add_logo("assets/logo_black.png", height=50)
 
 if "shared" not in st.session_state:
    st.session_state["shared"] = True
