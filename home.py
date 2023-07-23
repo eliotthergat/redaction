@@ -163,6 +163,19 @@ def better_titles(text, infos):
                         {"role": "user", "content": "[TEXT : ]\n" + text + "\n [INFOS : ]\n" + infos}]
     )
     return response["choices"][0]["message"]["content"]
+
+def fact_check(text):
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        temperature=st.session_state.get("TEMPERATURE"),
+        max_tokens=st.session_state.get("MAX_TOKENS"),
+        top_p=1,
+        frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
+        presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
+        messages=[{"role": "system", "content": "Tu es médecin expert. Existe-t-il des informations médicalement inexactes dans ce texte ? "},
+                        {"role": "user", "content": "[TEXT : ]\n" + text}]
+    )
+    return response["choices"][0]["message"]["content"]
     
 if submit:
 
@@ -249,6 +262,12 @@ if submit:
                 file_name='texte.md',
                 mime='text/markdown',
             )
+
+            st.error("⚠️ Fact checking en cours...")
+            fact_check = fact_check(final_text)
+            with st.expander("Fact checking", expanded=False):
+                st.write(fact_check)
+                
             if suggestion == "Avec suggestions":
                 st.warning("Proposition de titres en cours...")
                 titles_to_add = better_titles(final_text, infos)
