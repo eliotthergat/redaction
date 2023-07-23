@@ -51,10 +51,8 @@ def concurrent_analyzer(text):
         temperature=st.session_state.get("TEMPERATURE"),
         max_tokens=st.session_state.get("MAX_TOKENS"),
         top_p=1,
-        frequency_penalty=0,
-        # st.session_state.get("FREQUENCY_PENALTY"),
-        presence_penalty=0,
-        # st.session_state.get("PRESENCE_PENALTY"),
+        frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
+        presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
         messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecine. Voici le ton de la marque pour laquelle tu devras rédiger : Le ton de la marque est hautement professionnel et informatif. La marque communique de manière détaillée, directe et précise, fournissant des informations complètes à son public. Il y a un élément de soin et de considération notable, trouvant un équilibre entre les conseils formels d'un professionnel de la santé et une communication empathique. Les attributs de langage gravitent autour de la terminologie médicale, du langage orienté vers la santé, des explications méthodiques et une emphase sur les détails. Le persona de la marque semble être celui d'un expert du secteur compétent, fiable et minutieux qui privilégie le bien-être des individus qu'il sert. Leur style se concentre sur l'instauration de la confiance, la démonstration d'expertise et l'assurance de la transparence dans la communication. Dans un premier temps, j'ai besoin que tu extraies toutes les informations de manière exhaustive sur cette page sous forme de liste. Concentre-toi sur les informations médicales, biologiques, physiologiques, chirurgicales, historiques et les conseils. Voici le texte à analyser :"},
                         {"role": "user", "content": text}]
     )
