@@ -36,7 +36,7 @@ with st.expander("Plan de contenu", expanded=True):
     plan = st.text_area("Plan", placeholder="Le plan de l'article")
     keywords = st.text_area("Mots-clés", placeholder="Les mots-clés à utiliser")
 
-col1, col2, col3 = st.columns([2, 2,1])
+col1, col2, col3 = st.columns([1, 2,1])
 with col2:
     suggestion = pills("", ["Pas de suggestions", "Avec suggestions"], ["🚫", "🎉"])
 submit = col3.button("Rédiger ✍🏻", use_container_width=1)
