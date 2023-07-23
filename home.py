@@ -30,9 +30,9 @@ st.markdown("### Rédigeons de meilleures pages que les concurrents 👀")
 suggestion = pills("", ["Pas de suggestions", "Avec suggestions"], ["🚫", "🎉"])
 with st.expander("Concurrence", expanded=False):
     link_1 = st.text_input("Concurrent n°1", placeholder="Lien")
-    text_1 = st.text_area("Concurrent n°1", placeholder="Contenu")
-    text_2 = st.text_area("Concurrent n°2", placeholder="Contenu")
-    text_3 = st.text_area("Concurrent n°3", placeholder="Contenu")
+    #text_1 = st.text_area("Concurrent n°1", placeholder="Contenu")
+    #text_2 = st.text_area("Concurrent n°2", placeholder="Contenu")
+    #text_3 = st.text_area("Concurrent n°3", placeholder="Contenu")
 with st.expander("Plan de contenu", expanded=False):
     title = st.text_input("Titre", placeholder="Le titre de l'article")
     plan = st.text_area("Plan", placeholder="Le plan de l'article")
@@ -43,18 +43,13 @@ col1, col2, col3 = st.columns([2, 2,1])
 submit = col3.button("Rédiger ✍🏻", use_container_width=1)
 
 def parser(link):
-    res = requests.get(link)
+    res = requests.get(link_1)
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
-    text = soup.find_all(text=True)
-    output = ''
-    blacklist = ['[document]','noscript','header','html','meta','head', 'input','script','style'
-        # there may be more elements you don't want, such as "style", etc.
-    ]
-    for t in text:
-        if t.parent.name not in blacklist:
-            output += '{} '.format(t)
-    return output
+    main = soup.find('main')
+    cleaned_html = str(main)
+    markdown_text = markdownify.markdownify(cleaned_html)
+    return markdown_text
 def concurrent_analyzer(text):
     response = openai.ChatCompletion.create(
         model="gpt-4",
@@ -122,19 +117,17 @@ def better_titles(text, infos):
     
 if submit:
 
-    res = requests.get(link_1)
-    html_page = res.content
-    soup = BeautifulSoup(html_page, 'html.parser')
-    main = soup.find('main')
-    cleaned_html = str(main)
-    markdown_text = markdownify.markdownify(cleaned_html)
-    st.write(markdown_text)
-
     with st.spinner("Requête en cours..."):
             ts_start = perf_counter()
-
+        
             col1, col2 = st.columns([1, 2])
-            col1.info("1/7 - Analyse du premier article...")
+            col1.info("1/10 - Scrapping du premier article...")
+            text_1 = parser(link_1)
+            with col2.expander("Text n°1", expanded=False):
+                st.write(text_1)
+        
+            col1, col2 = st.columns([1, 2])
+            col1.info("2/10 - Analyse du premier article...")
             response_1 = concurrent_analyzer(text_1)
             with col2.expander("Analyse n°1", expanded=False):
                 st.write(response_1)
