@@ -26,8 +26,8 @@ sidebar()
 openai.api_key = st.session_state.get("OPENAI_API_KEY")
 
 st.markdown("### Rédigeons de meilleures pages que les concurrents 👀")
-
-selected = pills("", ["Pas de suggestions", "Avec suggestions"], ["🚫", "🎉"])
+col1, col2, col3 = st.columns([2, 2,2])
+selected = col3.pills("", ["Pas de suggestions", "Avec suggestions"], ["🚫", "🎉"])
 with st.expander("Concurrence", expanded=True):
     text_1 = st.text_area("Concurrent n°1", placeholder="Contenu")
     text_2 = st.text_area("Concurrent n°2", placeholder="Contenu")
