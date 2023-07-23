@@ -56,7 +56,7 @@ def concurrent_analyzer(text):
                         {"role": "user", "content": text}]
         
     )
-    return response
+    return response["choices"][0]["message"]["content"]
 if submit:
     st.success("Test")
     text_1 = parser(link_1)
