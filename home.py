@@ -50,8 +50,8 @@ def parser(link):
     res = requests.get(link)
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
-    soup.a.clear()
-    soup.picture.clear()
+    main = soup.a.clear()
+    main = soup.picture.clear()
     
     
     main = soup.find('main')
