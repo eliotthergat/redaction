@@ -9,6 +9,7 @@ st.set_page_config(
     page_icon="🖊️",
 )
 st.header("🖊️ Khlinic writer")
+st.markdown("---")
 
 
 sidebar()
