@@ -31,4 +31,14 @@ with st.expander("Concurrence", expanded=True):
     submit = col3.button("Scrapper 🏴‍☠️", use_container_width=1)
 if submit:
     st.success("Test")
-
+    res = requests.get(link_1)
+    html_page = res.content
+    text = soup.find_all(text=True)
+    output = ''
+    blacklist = ['[document]','noscript','header','html','meta','head', 'input','script',
+        # there may be more elements you don't want, such as "style", etc.
+    ]
+    for t in text:
+        if t.parent.name not in blacklist:
+            output += '{} '.format(t)
+    st.write(output)
