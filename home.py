@@ -54,6 +54,7 @@ def parser(link):
     
     main = soup.find('body')
     main = soup.find('main')
+    main = soup.extract('div')
     
     cleaned_html = str(main)
     st.write(cleaned_html)
