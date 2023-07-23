@@ -273,11 +273,10 @@ if submit:
             with st.expander("Texte finalisé", expanded=False):
                 st.write(final_text)
 
-            st.success("13/13 - Rédaction du texte optimisé...")
+            st.success("13/13 - Mise en gras du texte...")
             final_text = bold_keywords(final_text)
             with st.expander("Texte avec mots-clés en gras", expanded=False):
                 st.write(final_text)
-
 
             col1, col2, col3 = st.columns([2, 2,1])
             col3.download_button(
