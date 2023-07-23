@@ -30,6 +30,9 @@ st.markdown("### Rédigeons de meilleures pages que les concurrents 👀")
 suggestion = pills("", ["Pas de suggestions", "Avec suggestions"], ["🚫", "🎉"])
 with st.expander("Concurrence", expanded=False):
     link_1 = st.text_input("Concurrent n°1", placeholder="Lien")
+    link_2 = st.text_input("Concurrent n°2", placeholder="Lien")
+    link_3 = st.text_input("Concurrent n°3", placeholder="Lien")
+    
     #text_1 = st.text_area("Concurrent n°1", placeholder="Contenu")
     #text_2 = st.text_area("Concurrent n°2", placeholder="Contenu")
     #text_3 = st.text_area("Concurrent n°3", placeholder="Contenu")
@@ -120,10 +123,9 @@ if submit:
     with st.spinner("Requête en cours..."):
             ts_start = perf_counter()
         
-            col1, col2 = st.columns([1, 2])
-            col1.info("1/10 - Scrapping du premier article...")
+            st.info("1/10 - Traitement du 1er article...")
             text_1 = parser(link_1)
-            with col2.expander("Text n°1", expanded=False):
+            with st.expander("Texte n°1", expanded=False):
                 st.write(text_1)
         
             col1, col2 = st.columns([1, 2])
