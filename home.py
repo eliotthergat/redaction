@@ -43,4 +43,5 @@ if submit:
     for t in text:
         if t.parent.name not in blacklist:
             output += '{} '.format(t)
-    st.write(text)
+    markdown_text = markdownify.markdownify(text)
+    st.write(markdown_text)
