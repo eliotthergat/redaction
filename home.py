@@ -54,7 +54,7 @@ def parser(link):
     for match in tags:
         match.decompose()
     
-    st.write(soup)
+    st.write(str(soup))
     if str(soup.find('article')) != 'None':
         main = soup.find('article')
     elif str(soup.find('main')) != 'None':
