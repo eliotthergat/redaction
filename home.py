@@ -65,9 +65,9 @@ def parser(link):
     tags = soup.findAll('script')
     for match in tags:
         match.decompose()
-    tags = soup.findAll('href')
+    tags = soup.findAll('a')
     for match in tags:
-        match['src']='#'
+        match['href']='#'
     
     if str(soup.find('article')) != 'None':
         main = soup.find('article')
