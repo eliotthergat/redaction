@@ -54,6 +54,8 @@ def parser(link):
     soup.header.extract()
     soup.img.extract()
     soup.script.extract()
+    soup.picture.extract()
+    soup.a.extract()
     
     main = soup.find('main')
     cleaned_html = str(main)
