@@ -21,6 +21,6 @@ sidebar()
 openai_api_key = st.session_state.get("OPENAI_API_KEY")
 
 with st.expander("Les données", expanded=True):
-    st.text_input()
+    link_1 = st.text_input("Lien 1", placeholder="Lien concurrent #1")
 
 
