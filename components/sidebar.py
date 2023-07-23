@@ -46,6 +46,6 @@ def sidebar():
         st.markdown("# À propos")
         url = "https://khlinic.fr"
         st.markdown(
-            "📖 Tous les crédits appartiennent à [link](%s)." % url
+            "📖 Tous les crédits appartiennent à [Khlinic](%s)." % url
         )
         
