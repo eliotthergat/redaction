@@ -144,7 +144,7 @@ if submit:
             with st.expander("Texte brut", expanded=False):
                 st.write(first_text)
 
-            st.succes("Amélioration à partir des mots-clés...")
+            st.success("Amélioration à partir des mots-clés...")
             final_text = better_writer(first_revision, keywords)
             with st.expander("Texte amélioré à partir des mots-clés", expanded=False):
                     st.write(final_text)
