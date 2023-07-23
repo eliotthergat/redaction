@@ -17,7 +17,6 @@ st.markdown("---")
 if "shared" not in st.session_state:
    st.session_state["shared"] = True
 
-
 sidebar()
 
 openai_api_key = st.session_state.get("OPENAI_API_KEY")
