@@ -26,8 +26,7 @@ sidebar()
 openai.api_key = st.session_state.get("OPENAI_API_KEY")
 
 st.markdown("### Rédigeons de meilleures pages que les concurrents 👀")
-col1, col2, col3 = st.columns([2, 2,2])
-selected = col3.pills("", ["Pas de suggestions", "Avec suggestions"], ["🚫", "🎉"])
+suggestion = pills("", ["Pas de suggestions", "Avec suggestions"], ["🚫", "🎉"])
 with st.expander("Concurrence", expanded=True):
     text_1 = st.text_area("Concurrent n°1", placeholder="Contenu")
     text_2 = st.text_area("Concurrent n°2", placeholder="Contenu")
@@ -162,11 +161,11 @@ if submit:
                 file_name='texte.md',
                 mime='text/markdown',
             )
-
-            st.warning("7/7 - Proposition de titres en cours...")
-            titles_to_add = better_titles(final_text, infos)
-            with st.expander("Titres à réviser", expanded=False):
-                    st.write(titles_to_add)
+            if suggestion:
+                st.warning("7/7 - Proposition de titres en cours...")
+                titles_to_add = better_titles(final_text, infos)
+                with st.expander("Titres à réviser", expanded=False):
+                        st.write(titles_to_add)
         
             ts_end = perf_counter()
             st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
