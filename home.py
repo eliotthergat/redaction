@@ -20,4 +20,7 @@ sidebar()
 
 openai_api_key = st.session_state.get("OPENAI_API_KEY")
 
+with st.expander("Les données", expanded=True):
+    st.text_input()
+
 
