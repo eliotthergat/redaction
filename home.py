@@ -1,4 +1,6 @@
 import streamlit as st
+import os
+import openai
 
 st.set_page_config(
     page_title="Accueil - Khlinic",
