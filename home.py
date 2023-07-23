@@ -50,12 +50,9 @@ def parser(link):
     res = requests.get(link)
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
-    
     main = soup.find('body')
     main = main.find('main')
-    
     cleaned_html = str(main)
-    st.write(cleaned_html)
     markdown_text = markdownify.markdownify(cleaned_html)
     return markdown_text
 def concurrent_analyzer(text):
