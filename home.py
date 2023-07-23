@@ -125,21 +125,10 @@ if submit:
     res = requests.get(link_1)
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
-    # Find header element
-    header = soup.find('header')
-    # Remove header element
-    header.decompose()
-    
-    # Find footer element
-    footer = soup.find('footer')
-    # Remove footer element
-    footer.decompose()
-
     main = soup.find('main')
-    
-    # Get cleaned HTML string
     cleaned_html = str(main)
-    st.write(cleaned_html)
+    markdown_text = markdownify.markdownify(cleaned_html)
+    st.write(markdown_text)
 
     with st.spinner("Requête en cours..."):
             ts_start = perf_counter()
