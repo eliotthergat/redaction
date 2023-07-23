@@ -30,8 +30,8 @@ with st.expander("Concurrence", expanded=True):
     link_3 = st.text_input("Lien 3", placeholder="Lien concurrent #3")
     col1, col2, col3 = st.columns([2, 2,1])
     submit = col3.button("Scrapper 🏴‍☠️", use_container_width=1)
-if submit:
-    st.success("Test")
+
+def parser(link):
     res = requests.get(link_1)
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
@@ -43,6 +43,7 @@ if submit:
     for t in text:
         if t.parent.name not in blacklist:
             output += '{} '.format(t)
-        
-    #markdown_text = markdownify.markdownify(output)
-    st.write(output)
+    return output
+if submit:
+    st.success("Test")
+    st.write(parser(link_1))
