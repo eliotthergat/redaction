@@ -85,7 +85,6 @@ def parser(link):
         main = soup.find('body')
     cleaned_html = str(main)
     markdown_text = markdownify.markdownify(cleaned_html)
-    st.write(str(markdown_text))
     return markdown_text
 def concurrent_analyzer(text):
     response = openai.ChatCompletion.create(
