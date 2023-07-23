@@ -27,7 +27,7 @@ def sidebar():
         st.session_state["OPENAI_API_KEY"] = api_key_input
         st.markdown("---")
         st.markdown("# Paramètres")
-    max_tokens = st.slider(
+        max_tokens = st.slider(
             "Longueur maximale (`max_tokens`):",
             help="Maximum number of tokens to consume",
             min_value=1,
