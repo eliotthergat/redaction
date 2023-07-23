@@ -236,7 +236,7 @@ if submit:
             with st.expander("Texte brut", expanded=False):
                 st.write(first_text)
 
-            st.warning("12/12 - Rédaction du texte optimisé...")
+            st.success("12/12 - Rédaction du texte optimisé...")
             final_text = better_keywords(first_text, keywords)
             with st.expander("Texte finalisé", expanded=False):
                 st.write(final_text)
@@ -245,7 +245,7 @@ if submit:
             col1, col2, col3 = st.columns([2, 2,1])
             col3.download_button(
                 label="Télécharger 💾",
-                data=first_text,
+                data=final_text,
                 file_name='texte.md',
                 mime='text/markdown',
             )
