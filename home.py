@@ -58,23 +58,24 @@ def concurrent_analyzer(text):
     )
     return response["choices"][0]["message"]["content"]
 if submit:
-    with st.spinner("Requête en cours..."):
-            ts_start = perf_counter()
-        
-            st.info("Analyse du premier article")
-            response_1 = concurrent_analyzer(text_1)
-            with st.expander("Analyse n°1", expanded=False):
-                st.write(response_1)
-                
-            st.info("Analyse du second article")
-            response_2 = concurrent_analyzer(text_2)
-            with st.expander("Analyse n°2", expanded=False):
-                st.write(response_2)
-
-            st.info("Analyse du troisième article")
-            response_3 = concurrent_analyzer(text_3)
-            with st.expander("Analyse n°3", expanded=False):
-                st.write(response_3)
-
-            ts_end = perf_counter()
-            st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
+    with st.expander("Analyses", expanded=True):
+        with st.spinner("Requête en cours..."):
+                ts_start = perf_counter()
+            
+                st.info("Analyse du premier article")
+                response_1 = concurrent_analyzer(text_1)
+                with st.expander("Analyse n°1", expanded=False):
+                    st.write(response_1)
+                    
+                st.info("Analyse du second article")
+                response_2 = concurrent_analyzer(text_2)
+                with st.expander("Analyse n°2", expanded=False):
+                    st.write(response_2)
+    
+                st.info("Analyse du troisième article")
+                response_3 = concurrent_analyzer(text_3)
+                with st.expander("Analyse n°3", expanded=False):
+                    st.write(response_3)
+    
+                ts_end = perf_counter()
+                st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
