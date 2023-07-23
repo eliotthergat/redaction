@@ -7,6 +7,7 @@ import markdownify
 from time import perf_counter
 from streamlit_pills import pills
 
+
 from components.sidebar import sidebar
 
 st.set_page_config(
