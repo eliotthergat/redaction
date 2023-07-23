@@ -125,40 +125,54 @@ if submit:
         
             st.markdown("### Traitement du 1er article...")
             col1, col2 = st.columns([1, 2])
-            col1.info("1/10 - Scrapping de l'article...")
+            col1.info("1/9 - Scrapping de l'article...")
             text_1 = parser(link_1)
             with col2.expander("Texte n°1", expanded=False):
                 st.write(text_1)
         
             col1, col2 = st.columns([1, 2])
-            col1.info("2/10 - Analyse de l'article...")
+            col1.info("2/9 - Analyse de l'article...")
             response_1 = concurrent_analyzer(text_1)
             with col2.expander("Analyse n°1", expanded=False):
                 st.write(response_1)
-                
+            
+            st.markdown("### Traitement du 2ème article...")
             col1, col2 = st.columns([1, 2])
-            col1.info("2/7 - Analyse du second article...")
+            col1.info("3/9 - Scrapping de l'article...")
+            text_2 = parser(link_2)
+            with col2.expander("Texte n°2", expanded=False):
+                st.write(text_2)
+        
+            col1, col2 = st.columns([1, 2])
+            col1.info("4/9 - Analyse de l'article...")
             response_2 = concurrent_analyzer(text_2)
             with col2.expander("Analyse n°2", expanded=False):
                 st.write(response_2)
-
+        
+            st.markdown("### Traitement du 3ème article...")
             col1, col2 = st.columns([1, 2])
-            col1.info("3/7 - Analyse du troisième article...")
+            col1.info("5/9 - Scrapping de l'article...")
+            text_3 = parser(link_3)
+            with col2.expander("Texte n°3", expanded=False):
+                st.write(text_3)
+                
+            col1, col2 = st.columns([1, 2])
+            col1.info("6/9 - Analyse de l'article...")
             response_3 = concurrent_analyzer(text_3)
             with col2.expander("Analyse n°3", expanded=False):
                 st.write(response_3)
                 
-            st.info("4/7 - Synthèse des connaissances acquises...")
+            st.info("7/9 - Synthèse des connaissances acquises...")
             infos = concurrent_sumerizer(response_1, response_2, response_3)
             with st.expander("Synthèse", expanded=False):
                 st.write(infos)
 
-            st.warning("5/7 - Rédaction du premier jet...")
+            st.warning("8/9 - Rédaction du premier jet...")
             first_text = writer(infos, title, plan, keywords)
             with st.expander("Texte brut", expanded=False):
                 st.write(first_text)
 
-            st.success("6/7 - Amélioration à partir des mots-clés...")
+            st.success("9/9 - Amélioration à partir des mots-clés...")
             final_text = better_keywords(first_text, keywords)
             with st.expander("Texte final", expanded=False):
                     st.write(final_text)
@@ -170,8 +184,8 @@ if submit:
                 file_name='texte.md',
                 mime='text/markdown',
             )
-            if suggestion:
-                st.warning("7/7 - Proposition de titres en cours...")
+            if suggestion = "Avec suggestions":
+                st.warning("Proposition de titres en cours...")
                 titles_to_add = better_titles(final_text, infos)
                 with st.expander("Titres à réviser", expanded=False):
                         st.write(titles_to_add)
