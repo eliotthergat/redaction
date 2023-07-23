@@ -128,29 +128,37 @@ if submit:
             col1, col2 = st.columns([1, 2])
             col1.info("2/7 - Analyse du second article...")
             response_2 = concurrent_analyzer(text_2)
-            with st.expander("Analyse n°2", expanded=False):
-                col2.write(response_2)
+            with col2.expander("Analyse n°2", expanded=False):
+                st.write(response_2)
 
             col1, col2 = st.columns([1, 2])
             col1.info("3/7 - Analyse du troisième article...")
             response_3 = concurrent_analyzer(text_3)
-            with st.expander("Analyse n°3", expanded=False):
-                col2.write(response_3)
+            with col2.expander("Analyse n°3", expanded=False):
+                st.write(response_3)
                 
             st.info("4/7 - Synthèse des connaissances acquises...")
             infos = concurrent_sumerizer(response_1, response_2, response_3)
             with st.expander("Synthèse", expanded=False):
                 st.write(infos)
 
-            st.success("5/7 - Rédaction du premier jet...")
+            st.warning("5/7 - Rédaction du premier jet...")
             first_text = writer(infos, title, plan, keywords)
             with st.expander("Texte brut", expanded=False):
                 st.write(first_text)
 
             st.success("6/7 - Amélioration à partir des mots-clés...")
-            final_text = better_writer(first_revision, keywords)
-            with st.expander("Texte amélioré à partir des mots-clés", expanded=False):
+            final_text = better_keywords(first_revision, keywords)
+            with st.expander("Texte final", expanded=False):
                     st.write(final_text)
+
+            col1, col2, col3 = st.columns([2, 2,1])
+            col3.download_button(
+                label="Télécharger le texte",
+                data=final_text,
+                file_name='texte.md',
+                mime='text/markdown',
+            )
 
             st.info("7/7 - Proposition de titres en cours...")
             titles_to_add = better_titles(final_text, infos)
@@ -159,10 +167,3 @@ if submit:
         
             ts_end = perf_counter()
             st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
-        
-            st.download_button(
-                label="Télécharger le texte",
-                data=final_text,
-                file_name='texte.md',
-                mime='text/markdown',
-            )
