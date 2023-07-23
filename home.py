@@ -5,10 +5,10 @@ import streamlit as st
 from components.sidebar import sidebar
 
 st.set_page_config(
-    page_title="Khlinic Brain",
-    page_icon="🧠",
+    page_title="Khlinic writer",
+    page_icon="🖊️",
 )
-st.header("🧠 Khlinic Brain")
+st.header("🖊️ Khlinic writer")
 
 
 sidebar()
