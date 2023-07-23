@@ -1,13 +1,11 @@
 import streamlit as st
-from PIL import Image
+from streamlit_extras.app_logo import add_logo
 
 st.set_page_config(
     page_title="Accueil - Khlinic",
     page_icon="✍🏻",
 )
 with st.sidebar:
-    image = Image.open('assets/logo.png')
-    st.image(image)
     st.markdown(
             "## How to use\n"
             "1. Enter your [OpenAI API key](https://platform.openai.com/account/api-keys) below🔑\n"  # noqa: E501
