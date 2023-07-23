@@ -32,7 +32,7 @@ with st.expander("Concurrence", expanded=True):
     submit = col3.button("Scrapper 🏴‍☠️", use_container_width=1)
 
 def parser(link):
-    res = requests.get(link_1)
+    res = requests.get(link)
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
     text = soup.find_all(text=True)
