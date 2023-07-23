@@ -35,7 +35,7 @@ if submit:
     res = requests.get(link_1)
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
-    text = soup.find_all(text=True)
+    text = soup.find_all(["h1", "h2", "h3", "h4"])
     output = ''
     blacklist = ['[document]','noscript','header','html','meta','head', 'input','script','style'
         # there may be more elements you don't want, such as "style", etc.
