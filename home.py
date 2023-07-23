@@ -46,7 +46,7 @@ col1, col2, col3 = st.columns([2, 2,1])
 submit = col3.button("Rédiger ✍🏻", use_container_width=1)
 
 def parser(link):
-    res = requests.get(link_1)
+    res = requests.get(link)
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
     main = soup.find('main')
