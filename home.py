@@ -51,10 +51,10 @@ def parser(link):
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
     st.write(str(soup.find('article')))
-    if str(soup.find('article')) is not None:
+    if str(soup.find('article')) is not 'None':
         main = soup.find('article')
-    elif str(soup.find('article')) is not None:
-        main = soup.find('article')
+    elif str(soup.find('main')) is not 'None':
+        main = soup.find('main')
     else:
         main = soup.find('body')
     cleaned_html = str(main)
