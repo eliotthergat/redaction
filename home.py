@@ -97,8 +97,21 @@ def better_writer(text, infos):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecine. Voici le ton de la marque pour laquelle tu devras rédiger : Le ton de la marque est hautement professionnel et informatif. La marque communique de manière détaillée, directe et précise, fournissant des informations complètes à son public. Il y a un élément de soin et de considération notable, trouvant un équilibre entre les conseils formels d'un professionnel de la santé et une communication empathique. Les attributs de langage gravitent autour de la terminologie médicale, du langage orienté vers la santé, des explications méthodiques et une emphase sur les détails. Le persona de la marque semble être celui d'un expert du secteur compétent, fiable et minutieux qui privilégie le bien-être des individus qu'il sert. Leur style se concentre sur l'instauration de la confiance, la démonstration d'expertise et l'assurance de la transparence dans la communication. Ta tâche est maintenant d’améliorer l’article contenu dans [TEXT] avec les informations contenus dans le texte [INFOS]. Reprends l’ensemble des informations sémantiques absentes et les mots clés absents du texte et ajoute les dans l’article [TEXT]. Ne change aucun titre, ne fais qu’ajouter du contenu."},
+        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecine. Ta tâche est maintenant d’améliorer l’article contenu dans [TEXT] avec les informations contenus dans la liste [INFOS]. Reprends l’ensemble des informations sémantiques absentes et les mots clés absents du texte et ajoute les dans l’article [TEXT]. Ne change aucun titre, ne fais qu’ajouter du contenu."},
                         {"role": "user", "content": "[TEXT : ]\n" + text + "\n [INFOS : ]\n" + infos}]
+    )
+    return response["choices"][0]["message"]["content"]
+    
+def better_keyword(text, keywords):
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        temperature=st.session_state.get("TEMPERATURE"),
+        max_tokens=st.session_state.get("MAX_TOKENS"),
+        top_p=1,
+        frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
+        presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
+        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecine. Voici le ton de la marque pour laquelle tu devras rédiger : Le ton de la marque est hautement professionnel et informatif. La marque communique de manière détaillée, directe et précise, fournissant des informations complètes à son public. Il y a un élément de soin et de considération notable, trouvant un équilibre entre les conseils formels d'un professionnel de la santé et une communication empathique. Les attributs de langage gravitent autour de la terminologie médicale, du langage orienté vers la santé, des explications méthodiques et une emphase sur les détails. Le persona de la marque semble être celui d'un expert du secteur compétent, fiable et minutieux qui privilégie le bien-être des individus qu'il sert. Leur style se concentre sur l'instauration de la confiance, la démonstration d'expertise et l'assurance de la transparence dans la communication. Ta tâche est maintenant d’améliorer l’article contenu dans [TEXT] avec les mots-clés contenus dans [KEYWORDS]. Ajoute les mots-clés manquants aux endroits pertinents, sans modifier les titres, les paragraphes ou le sens du contenu. Tu dois améliorer sémantiquement le texte dans le dénaturer."},
+                        {"role": "user", "content": "[TEXT : ]\n" + text + "\n [KEYWORDS : ]\n" + keywords}]
     )
     return response["choices"][0]["message"]["content"]
     
@@ -131,10 +144,15 @@ if submit:
             with st.expander("Texte brut", expanded=False):
                 st.write(first_text)
 
-            st.info("Amélioration à partir du premier article...")
-            first_revision = better_writer(first_text, text_1)
-            with st.expander("Texte amélioré à partir du 1er article", expanded=False):
+            st.info("Amélioration à partir de la synthèse...")
+            first_revision = better_writer(first_text, infos)
+            with st.expander("Texte amélioré à partir de la synthèse", expanded=False):
                     st.write(first_revision)
+
+            st.succes("Amélioration à partir des mots-clés")
+            final_text = better_writer(first_revision, keywords)
+            with st.expander("Texte amélioré à partir des mots-clés", expanded=False):
+                    st.write(final_text)
         
             ts_end = perf_counter()
             st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
