@@ -157,6 +157,19 @@ def better_keywords(text, keywords):
     )
     return response["choices"][0]["message"]["content"]
 
+def bold_keywords(text):
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        temperature=st.session_state.get("TEMPERATURE"),
+        max_tokens=st.session_state.get("MAX_TOKENS"),
+        top_p=1,
+        frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
+        presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
+        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecine. Ta tâche est maintenant d’améliorer l’article contenu dans [TEXT] en mettant en gras dans le format markdown les mots-clés et expressions sémantiquement importantes. Ne modifie jamais les titres ou le texte, ne fais que mettre en gras."},
+                        {"role": "user", "content": "[TEXT : ]\n" + text}]
+    )
+    return response["choices"][0]["message"]["content"]
+
 def better_titles(text, infos):
     response = openai.ChatCompletion.create(
         model="gpt-4",
@@ -258,6 +271,11 @@ if submit:
             st.success("12/12 - Rédaction du texte optimisé...")
             final_text = better_keywords(first_text, keywords)
             with st.expander("Texte finalisé", expanded=False):
+                st.write(final_text)
+
+            st.success("13/13 - Rédaction du texte optimisé...")
+            final_text = bold_keywords(final_text)
+            with st.expander("Texte avec mots-clés en gras", expanded=False):
                 st.write(final_text)
 
 
