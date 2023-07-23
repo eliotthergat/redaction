@@ -36,7 +36,7 @@ if submit:
     soup = BeautifulSoup(html_page, 'html.parser')
     text = soup.find_all(text=True)
     output = ''
-    blacklist = ['[document]','noscript','header','html','meta','head', 'input','script',
+    blacklist = ['[document]','noscript','header','html','meta','head', 'input','script','style',
         # there may be more elements you don't want, such as "style", etc.
     ]
     for t in text:
