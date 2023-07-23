@@ -119,37 +119,37 @@ if submit:
     with st.spinner("Requête en cours..."):
             ts_start = perf_counter()
         
-            st.info("Analyse du premier article...")
+            st.info("1/7 - Analyse du premier article...")
             response_1 = concurrent_analyzer(text_1)
             with st.expander("Analyse n°1", expanded=False):
                 st.write(response_1)
                 
-            st.info("Analyse du second article...")
+            st.info("2/7 - Analyse du second article...")
             response_2 = concurrent_analyzer(text_2)
             with st.expander("Analyse n°2", expanded=False):
                 st.write(response_2)
 
-            st.info("Analyse du troisième article...")
+            st.info("3/7 - Analyse du troisième article...")
             response_3 = concurrent_analyzer(text_3)
             with st.expander("Analyse n°3", expanded=False):
                 st.write(response_3)
                 
-            st.info("Synthèse des connaissances acquises...")
+            st.info("4/7 - Synthèse des connaissances acquises...")
             infos = concurrent_sumerizer(response_1, response_2, response_3)
             with st.expander("Synthèse", expanded=False):
                 st.write(infos)
 
-            st.success("Rédaction du premier jet...")
+            st.success("5/7 - Rédaction du premier jet...")
             first_text = writer(infos, title, plan, keywords)
             with st.expander("Texte brut", expanded=False):
                 st.write(first_text)
 
-            st.success("Amélioration à partir des mots-clés...")
+            st.success("6/7 - Amélioration à partir des mots-clés...")
             final_text = better_writer(first_revision, keywords)
             with st.expander("Texte amélioré à partir des mots-clés", expanded=False):
                     st.write(final_text)
 
-            st.info("Proposition de titres en cours...")
+            st.info("7/7 - Proposition de titres en cours...")
             titles_to_add = better_titles(final_text, infos)
             with st.expander("Titres à réviser", expanded=False):
                     st.write(titles_to_add)
