@@ -44,6 +44,15 @@ def parser(link):
         if t.parent.name not in blacklist:
             output += '{} '.format(t)
     return output
+def concurrent_analyzer(text):
+    response = openai.ChatCompletion.create(
+      model="gpt-4",
+      temperature=1,
+      max_tokens=2048,
+      top_p=1,
+      frequency_penalty=0,
+      presence_penalty=0
+    )
 if submit:
     st.success("Test")
-    st.write(parser(link_1))
+    text_1 = parser(link_1)
