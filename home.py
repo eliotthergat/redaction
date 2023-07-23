@@ -9,6 +9,7 @@ st.set_page_config(
     page_icon="🖊️",
 )
 st.header("🖊️ Khlinic writer")
+st.markdown("## Un peu d'IA pour gagner beaucoup de 💸")
 st.markdown("---")
 
 
