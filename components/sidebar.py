@@ -25,10 +25,6 @@ def sidebar():
             or st.session_state.get("OPENAI_API_KEY", ""),
         )
         st.session_state["OPENAI_API_KEY"] = api_key_input
-        if not openai_api_key:
-            st.warning(
-                "Entrez votre clé API"
-            )
         st.markdown("---")
         st.markdown("# Paramètres")
         max_tokens = st.slider("Longueur maximale (`max_tokens`):", min_value=1, max_value=8000, value=st.session_state.get("MAX_TOKENS", 2048), step=25, help="Maximum number of tokens to consume")
