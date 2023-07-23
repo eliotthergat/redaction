@@ -62,6 +62,9 @@ def parser(link):
     tags = soup.findAll('header')
     for match in tags:
         match.decompose()
+    tags = soup.findAll('a')
+    for match in tags:
+        match.decompose()
     
     if str(soup.find('article')) != 'None':
         main = soup.find('article')
