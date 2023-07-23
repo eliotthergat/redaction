@@ -30,7 +30,8 @@ def sidebar():
         max_tokens = st.slider("Longueur maximale (`max_tokens`):", min_value=1, max_value=8000, value=st.session_state.get("MAX_TOKENS", 2048), step=25, help="Maximum number of tokens to consume")
         st.session_state["MAX_TOKENS"] = max_tokens
         
-        #PARAMS["temperature"] = st.slider("Température (`randomness`)", min_value=0.0, max_value=2.0, value=1, step=0.1)
+        temperature = st.slider("Température", min_value=0.0, max_value=2.0, value=value=st.session_state.get("TEMPERATURE", 1), step=0.1)
+        st.session_state["TEMPERATURE"] = temperature
         #PARAMS["presence_penalty"] = st.slider("Pénalité de présence (`presence_penalty`)", min_value=0.0, max_value=2.0, value=0, step=0.1)
         #PARAMS["frequency_penalty"] = st.slider("Pénalité de fréquence (`frequence_penalty`)", min_value=0.0, max_value=2.0, value=0, step=0.1)
         st.markdown("---")
