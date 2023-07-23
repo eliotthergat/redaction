@@ -26,7 +26,7 @@ sidebar()
 openai.api_key = st.session_state.get("OPENAI_API_KEY")
 
 st.markdown("### Rédigeons de meilleures pages que les concurrents 👀")
-suggestion = pills("", ["Pas de suggestions", "Avec suggestions"], ["🚫", "🎉"])
+
 with st.expander("Concurrence", expanded=True):
     text_1 = st.text_area("Concurrent n°1", placeholder="Contenu")
     text_2 = st.text_area("Concurrent n°2", placeholder="Contenu")
@@ -37,6 +37,8 @@ with st.expander("Plan de contenu", expanded=True):
     keywords = st.text_area("Mots-clés", placeholder="Les mots-clés à utiliser")
 
 col1, col2, col3 = st.columns([2, 2,1])
+with col2:
+    suggestion = pills("", ["Pas de suggestions", "Avec suggestions"], ["🚫", "🎉"])
 submit = col3.button("Rédiger ✍🏻", use_container_width=1)
 
 def parser(link):
