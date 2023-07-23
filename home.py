@@ -11,12 +11,12 @@ from streamlit_pills import pills
 from components.sidebar import sidebar
 
 st.set_page_config(
-    page_title="Khlinic writer",
-    page_icon="🖊️",
+    page_title="Khontenu",
+    page_icon="🧠",
 )
 
 
-st.header("🖊️ Khlinic writer")
+st.header("🧠 Khontenu")
 st.markdown("---")
 
 if "shared" not in st.session_state:
