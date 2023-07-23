@@ -50,9 +50,9 @@ def parser(link):
     res = requests.get(link)
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
-    tags = soup.find_all('head')
-    for tag in tags:
-        tag.head.decompose()
+    soup.a.clear()
+    soup.picture.clear()
+    
     
     main = soup.find('main')
     cleaned_html = str(main)
