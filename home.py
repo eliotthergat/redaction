@@ -165,7 +165,7 @@ def bold_keywords(text):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecine. Ta tâche est maintenant d’améliorer l’article contenu dans [TEXT] en mettant en gras dans le format markdown les mots-clés et expressions sémantiquement importantes. Ne modifie jamais les titres ou le texte, ne fais que mettre en gras."},
+        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Ta tâche est maintenant d’améliorer l’article contenu dans [TEXT] en mettant en gras dans le format markdown les mots-clés et expressions sémantiquement importantes. Ne modifie jamais les titres ou le texte, ne fais que mettre en gras."},
                         {"role": "user", "content": "[TEXT : ]\n" + text}]
     )
     return response["choices"][0]["message"]["content"]
@@ -268,14 +268,9 @@ if submit:
             with st.expander("Texte brut", expanded=False):
                 st.write(first_text)
 
-            st.success("12/12 - Rédaction du texte optimisé...")
-            final_text = better_keywords(first_text, keywords)
+            st.success("12/12 - Mise en gras du texte...")
+            final_text = bold_keywords(first)
             with st.expander("Texte finalisé", expanded=False):
-                st.write(final_text)
-
-            st.success("13/13 - Mise en gras du texte...")
-            final_text = bold_keywords(final_text)
-            with st.expander("Texte avec mots-clés en gras", expanded=False):
                 st.write(final_text)
 
             col1, col2, col3 = st.columns([2, 2,1])
