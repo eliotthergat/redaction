@@ -17,5 +17,5 @@ st.markdown(
 """
 )
 st.sidebar.subheader("Paramètres")
-PARAMS = {}
-PARAMS["api_key"] = st.text_area("OpenAI API key")
+    PARAMS = {}
+    PARAMS["api_key"] = st.text_area("OpenAI API key")
