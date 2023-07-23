@@ -11,10 +11,11 @@ def sidebar():
         st.image('assets/logo.svg')
         st.markdown(
                 "## Comment fonctionne l'outil ?\n"
-                "1. Entrez une clé OpenAI 🔑\n"
-                "2. Choisissez les textes à analyser 🏴‍☠️\n"
-                "3. Entrez le plan 🗺️\n"
-                "4. Entrez les mots-clés 🦜\n"
+                "🔑 Entrez une clé OpenAI 🔑\n"
+                "🏴‍☠️ Choisissez les textes à analyser 🏴‍☠️\n"
+                "🏆 Entrez le titre \n"
+                "🗺️ Entrez le plan \n"
+                "🦜 Entrez les mots-clés \n"
             )
         api_key_input = st.text_input(
             "OpenAI API Key",
