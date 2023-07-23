@@ -53,6 +53,8 @@ def parser(link):
     
     
     main = soup.find('body')
+    main = soup.find('main')
+    
     cleaned_html = str(main)
     st.write(cleaned_html)
     markdown_text = markdownify.markdownify(cleaned_html)
