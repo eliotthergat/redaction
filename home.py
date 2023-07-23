@@ -28,7 +28,13 @@ openai.api_key = st.session_state.get("OPENAI_API_KEY")
 
 st.markdown("### Rédigeons de meilleures pages que les concurrents 👀")
 
-suggestion = pills("", ["Avec suggestions", "Pas de suggestions"], ["🎉", "🚫"])
+col1, col2 = st.columns(2)
+
+with col1:
+    suggestion = pills("", ["Avec suggestions", "Pas de suggestions"], ["🎉", "🚫"])
+with col2:
+    check = pills("", ["Avec fact checking", "Sans fact checking"], ["✅", "🚨"])
+
 with st.expander("Concurrence", expanded=False):
     link_1 = st.text_input("Concurrent n°1", placeholder="Lien")
     link_2 = st.text_input("Concurrent n°2", placeholder="Lien")
@@ -262,11 +268,11 @@ if submit:
                 file_name='texte.md',
                 mime='text/markdown',
             )
-
-            st.error("⚠️ Fact checking en cours...")
-            fact_check = fact_check(final_text)
-            with st.expander("Fact checking", expanded=False):
-                st.write(fact_check)
+            if check == "Avec fact checking":
+                st.error("⚠️ Fact checking en cours...")
+                fact_check = fact_check(final_text)
+                with st.expander("Fact checking", expanded=False):
+                    st.write(fact_check)
                 
             if suggestion == "Avec suggestions":
                 st.warning("Proposition de titres en cours...")
