@@ -52,9 +52,6 @@ def parser(link):
     soup = BeautifulSoup(html_page, 'html.parser')
     header = soup.find('header')
     header.decompose()
-    
-    footer = soup.find('footer')
-    footer.decompose()
 
     img = soup.find('img')
     img.decompose()
