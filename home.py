@@ -51,9 +51,9 @@ def parser(link):
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
     st.write(str(soup.find('article')))
-    if soup.find('article') is not None:
+    if str(soup.find('article')) is not None:
         main = soup.find('article')
-    elif soup.find('main') is not None:
+    elif str(soup.find('article')) is not None:
         main = soup.find('article')
     else:
         main = soup.find('body')
