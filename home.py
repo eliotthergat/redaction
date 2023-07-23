@@ -1,6 +1,6 @@
 import streamlit as st
 # from streamlit_extras.switch_page_button import switch_page
-from streamlit_extras.app_logo import add_logo
+# from streamlit_extras.app_logo import add_logo
 
 st.set_page_config(
     page_title="Accueil - Khlinic",
