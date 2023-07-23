@@ -94,7 +94,7 @@ def markdown_generator(text):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": "À partir du code HTML suivant, extraies l'article principal sous format markdown. Ne conserve que les H1, H2, H3, H4, H5, H6, les paragraphes et les listes contenues dans le corps principal de l'article. Supprime les sections à lire également, catégories, etc..."},
+        messages=[{"role": "system", "content": "À partir du code markdown suivant, extraies l'article principal sous format markdown. Ne conserve que les H1, H2, H3, H4, H5, H6, les paragraphes et les listes contenues dans le corps principal de l'article. Supprime les sections à lire également, catégories, les crédits, etc..."},
                         {"role": "user", "content": text}]
     )
     return response["choices"][0]["message"]["content"]
@@ -187,7 +187,7 @@ if submit:
             col1.info("3/9 - Scrapping de l'article...")
             text_2 = parser(link_2)
             with col2.expander("Texte n°2", expanded=False):
-                st.write(text_2)
+                st.write(markdown_generator(text_2))
         
             col1, col2 = st.columns([1, 2])
             col1.info("4/9 - Analyse de l'article...")
@@ -200,7 +200,7 @@ if submit:
             col1.info("5/9 - Scrapping de l'article...")
             text_3 = parser(link_3)
             with col2.expander("Texte n°3", expanded=False):
-                st.write(text_3)
+                st.write(markdown_generator(text_3))
                 
             col1, col2 = st.columns([1, 2])
             col1.info("6/9 - Analyse de l'article...")
