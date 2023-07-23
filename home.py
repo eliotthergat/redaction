@@ -51,8 +51,8 @@ def parser(link):
     html_page = res.content
     soup = BeautifulSoup(html_page, 'html.parser')
     tags = soup.findAll('img')
-        for match in tags:
-          match.decompose()
+    for match in tags:
+        match.decompose()
     
     st.write(soup)
     if str(soup.find('article')) != 'None':
