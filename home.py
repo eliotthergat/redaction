@@ -88,19 +88,6 @@ def writer(infos, title, plan, keywords):
                         {"role": "user", "content": "[INFOS : ]\n" + infos + "\n [TITLE : ]\n" + title + "\n [PLAN : ]\n" + plan + "\n [KEYWORDS : ]\n" + keywords}]
     )
     return response["choices"][0]["message"]["content"]
-
-def better_writer(text, infos):
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        temperature=st.session_state.get("TEMPERATURE"),
-        max_tokens=st.session_state.get("MAX_TOKENS"),
-        top_p=1,
-        frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
-        presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecine. Ta tâche est maintenant d’améliorer l’article contenu dans [TEXT] avec les informations contenus dans la liste [INFOS]. Reprends l’ensemble des informations sémantiques absentes et les mots clés absents du texte et ajoute les dans l’article [TEXT]. Ne change aucun titre, ne fais qu’ajouter du contenu."},
-                        {"role": "user", "content": "[TEXT : ]\n" + text + "\n [INFOS : ]\n" + infos}]
-    )
-    return response["choices"][0]["message"]["content"]
     
 def better_keyword(text, keywords):
     response = openai.ChatCompletion.create(
@@ -157,11 +144,6 @@ if submit:
             with st.expander("Texte brut", expanded=False):
                 st.write(first_text)
 
-            st.info("Amélioration à partir de la synthèse...")
-            first_revision = better_writer(first_text, infos)
-            with st.expander("Texte amélioré à partir de la synthèse", expanded=False):
-                    st.write(first_revision)
-
             st.succes("Amélioration à partir des mots-clés...")
             final_text = better_writer(first_revision, keywords)
             with st.expander("Texte amélioré à partir des mots-clés", expanded=False):
@@ -174,3 +156,10 @@ if submit:
         
             ts_end = perf_counter()
             st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
+        
+            st.download_button(
+                label="Télécharger le texte",
+                data=final_text,
+                file_name='texte.md',
+                mime='text/markdown',
+            )
