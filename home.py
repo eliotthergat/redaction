@@ -5,6 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 import markdownify
 from time import perf_counter
+from streamlit_pills import pills
 
 from components.sidebar import sidebar
 
@@ -25,6 +26,8 @@ sidebar()
 openai.api_key = st.session_state.get("OPENAI_API_KEY")
 
 st.markdown("### Rédigeons de meilleures pages que les concurrents 👀")
+
+selected = pills("", ["Pas de suggestions", "Avec suggestions"], ["🚫", "🎉"])
 with st.expander("Concurrence", expanded=True):
     text_1 = st.text_area("Concurrent n°1", placeholder="Contenu")
     text_2 = st.text_area("Concurrent n°2", placeholder="Contenu")
