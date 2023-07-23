@@ -66,7 +66,7 @@ def concurrent_sumerizer(response_1, response_2, response_3):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecine. Voici le ton de la marque pour laquelle tu devras rédiger : Le ton de la marque est hautement professionnel et informatif. La marque communique de manière détaillée, directe et précise, fournissant des informations complètes à son public. Il y a un élément de soin et de considération notable, trouvant un équilibre entre les conseils formels d'un professionnel de la santé et une communication empathique. Les attributs de langage gravitent autour de la terminologie médicale, du langage orienté vers la santé, des explications méthodiques et une emphase sur les détails. Le persona de la marque semble être celui d'un expert du secteur compétent, fiable et minutieux qui privilégie le bien-être des individus qu'il sert. Leur style se concentre sur l'instauration de la confiance, la démonstration d'expertise et l'assurance de la transparence dans la communication. Regroupe sous forme de liste l'ensemble des informations données dans ces 3 textes. Cette liste servira de base de connaissance future pour la rédaction d'un article, sois précis et exhaustif.  Voici les textes à analyser :"},
+        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecine. Voici le ton de la marque pour laquelle tu devras rédiger : Le ton de la marque est hautement professionnel et informatif. La marque communique de manière détaillée, directe et précise, fournissant des informations complètes à son public. Il y a un élément de soin et de considération notable, trouvant un équilibre entre les conseils formels d'un professionnel de la santé et une communication empathique. Les attributs de langage gravitent autour de la terminologie médicale, du langage orienté vers la santé, des explications méthodiques et une emphase sur les détails. Le persona de la marque semble être celui d'un expert du secteur compétent, fiable et minutieux qui privilégie le bien-être des individus qu'il sert. Leur style se concentre sur l'instauration de la confiance, la démonstration d'expertise et l'assurance de la transparence dans la communication. Regroupe sous forme de liste l'ensemble des informations données dans ces 3 textes. Cette liste servira de base de connaissance future pour la rédaction d'un article, sois précis et exhaustif, reprends toutes les informations données. Reprends toutes les informations médicales, physiologiques, biologiques, anatomiques, les conseils. Voici les textes à analyser :"},
                         {"role": "user", "content": "[TEXTE 1 : ]\n" + response_1 + "\n [TEXTE 2 : ]\n" + response_2 + "\n [TEXTE 3 : ]\n" + response_3}]
     )
     return response["choices"][0]["message"]["content"]
@@ -75,23 +75,23 @@ if submit:
     with st.spinner("Requête en cours..."):
             ts_start = perf_counter()
         
-            st.info("Analyse du premier article")
+            st.info("Analyse du premier article...")
             response_1 = concurrent_analyzer(text_1)
             with st.expander("Analyse n°1", expanded=False):
                 st.write(response_1)
                 
-            st.info("Analyse du second article")
+            st.info("Analyse du second article...")
             response_2 = concurrent_analyzer(text_2)
             with st.expander("Analyse n°2", expanded=False):
                 st.write(response_2)
 
-            st.info("Analyse du troisième article")
+            st.info("Analyse du troisième article...")
             response_3 = concurrent_analyzer(text_3)
             with st.expander("Analyse n°3", expanded=False):
                 st.write(response_3)
                 
-            st.info("Analyse du troisième article")
-            complete = concurrent_sumerizer(response_1, response_2, response_3)
+            st.info("Synthèse des connaissances acquises...")
+            complete = concurrent_sumerizer(text_1, text_2, text_3)
             st.write(complete)
         
             ts_end = perf_counter()
