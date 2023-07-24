@@ -35,6 +35,8 @@ with col1:
 with col2:
     check = pills("", ["Avec fact checking", "Sans fact checking"], ["✅", "🚨"])
 
+client = pills("", ["Médecin", "Éducation", "HOF"], ["🩺", "👨🏻‍🏫", "🔥"])
+
 with st.expander("Concurrence", expanded=False):
     link_1 = st.text_input("Concurrent n°1", placeholder="Lien")
     link_2 = st.text_input("Concurrent n°2", placeholder="Lien")
