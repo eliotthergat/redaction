@@ -18,6 +18,7 @@ from functions.concurrent_sumerizer import concurrent_sumerizer
 from functions.bolder_keywords import bold_keywords
 from functions.better_titles import better_titles
 from functions.fact_check import fact_check
+from functions.completer import completer
 
 st.set_page_config(
     page_title="Khontenu",
@@ -62,18 +63,7 @@ client = pills("", ["Médecin", "Éducation", "Agence"], ["🩺", "👨🏻‍�
 col1, col2, col3 = st.columns([2, 2,1])
 submit = col3.button("Rédiger ✍🏻", use_container_width=1)
     
-def completer(text, infos, title, plan, keywords):
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        temperature=st.session_state.get("TEMPERATURE"),
-        max_tokens=st.session_state.get("MAX_TOKENS"),
-        top_p=1,
-        frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
-        presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": st.session_state["completer_prompt"] + "\n[TEXT : ]\n" + text +"\n[INFOS : ]\n" + st.session_state["infos"] + "\n [TITLE : ]\n" + title + "\n[KEYWORDS : ]\n" + keywords},
-                        {"role": "user", "content": "[PLAN :]\n" + plan}]
-    )
-    return response["choices"][0]["message"]["content"]
+
     
 if submit:
     define_client(client)
