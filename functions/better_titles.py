@@ -16,4 +16,5 @@ def better_titles(text, infos):
         messages=[{"role": "system", "content": st.session_state.get("title_prompt")},
                         {"role": "user", "content": "[TEXT : ]\n" + text + "\n [INFOS : ]\n" + infos}]
     )
+
     return response["choices"][0]["message"]["content"]
