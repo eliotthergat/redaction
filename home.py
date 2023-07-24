@@ -65,6 +65,11 @@ submit = col3.button("Rédiger ✍🏻", use_container_width=1)
     
 if submit:
     define_client(client)
+    if check == "Avec fact checking":
+        st.error("Fact checking en cours...")
+        #fact = fact_check(final_text)
+        #with st.expander("Fact checking", expanded=False):
+                #st.write(fact)
 
     st.session_state["total_tokens"] = 0
     st.session_state["completion_tokens"] = 0
@@ -156,9 +161,19 @@ if submit:
             file_name='texte.md',
             mime='text/markdown',
         )
+        if check == "Avec fact checking":
+            st.error("Fact checking en cours...")
+            fact = fact_check(final_text)
+            with st.expander("Fact checking", expanded=False):
+                st.write(fact)
 
-
-        cost = st.session_state["prompt_tokens"] * 0.00003 + st.session_state["completion_tokens"] * 0.00006
+        if suggestion == "Avec suggestions":
+            st.success("Proposition de titres en cours...")
+            suggestion_text = better_titles(final_text, st.session_state.get("infos"))
+            with st.expander("Titres possibles", expanded=False):
+                st.write(suggestion_text)
+        
         ts_end = perf_counter()
-        st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
+        st.info(f" {round(((ts_end - ts_start)/60), 3)} minutes d'exécution")
+        cost = st.session_state["prompt_tokens"] * 0.00003 + st.session_state["completion_tokens"] * 0.00006
         st.write("Coût de l'article : " + str(cost) + " $")
