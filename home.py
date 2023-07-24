@@ -320,11 +320,11 @@ if submit:
 
         if modifier : 
             st.warning("11b/12 - Article en cours de correction...")
-            final_text = completer(first_text, infos, title, plan, keywords)
+            final_text = first_text + "\n" + completer(first_text, infos, title, plan, keywords)
             with st.expander("Texte complet", expanded=False):
                 st.write(final_text)
             st.success("12/12 - Mise en gras du texte...")
-            final_text = bold_keywords(first_text)
+            final_text = bold_keywords(final_text)
             with st.expander("Texte finalisé", expanded=False):
                 st.write(final_text)
 
