@@ -66,7 +66,7 @@ submit = col3.button("Rédiger ✍🏻", use_container_width=1)
 if submit:
     define_client(client)
 
-    st.session_state["total_token"] = 0
+    st.session_state["total_tokens"] = 0
     st.session_state["completion_tokens"] = 0
     st.session_state["prompt_tokens"] = 0
 
