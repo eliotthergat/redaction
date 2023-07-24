@@ -16,4 +16,7 @@ def fact_check(text):
         messages=[{"role": "system", "content": "Tu es médecin expert. Existe-t-il des informations médicalement inexactes dans ce texte ? "},
                         {"role": "user", "content": "[TEXT : ]\n" + text}]
     )
+    st.session_state["total_tokens"] = st.session_state["total_tokens"] + response["usage"]["total_tokens"]
+    st.session_state["completion_tokens"] = st.session_state["completion_tokens"] + response["usage"]['completion_tokens']
+    st.session_state["prompt_tokens"] = st.session_state["prompt_tokens"] + response["usage"]['prompt_tokens']
     return response["choices"][0]["message"]["content"]

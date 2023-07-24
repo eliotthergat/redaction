@@ -19,6 +19,5 @@ def markdown_generator(text):
     st.session_state["total_tokens"] = st.session_state["total_tokens"] + response["usage"]["total_tokens"]
     st.session_state["completion_tokens"] = st.session_state["completion_tokens"] + response["usage"]['completion_tokens']
     st.session_state["prompt_tokens"] = st.session_state["prompt_tokens"] + response["usage"]['prompt_tokens']
-
-    st.write("Total token : " + str(st.session_state["total_tokens"]) + " | Prompt tokens : " + str(st.session_state["prompt_tokens"]) + " | Completion tokens : " + str(st.session_state["completion_tokens"]))
+    
     return response["choices"][0]["message"]["content"]

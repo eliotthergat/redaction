@@ -16,4 +16,7 @@ def completer(text, infos, title, plan, keywords):
         messages=[{"role": "system", "content": st.session_state.get("completer_prompt") + "\n[TEXT : ]\n" + text +"\n[INFOS : ]\n" + infos + "\n [TITLE : ]\n" + title + "\n[KEYWORDS : ]\n" + keywords},
                         {"role": "user", "content": "[PLAN :]\n" + plan}]
     )
+    st.session_state["total_tokens"] = st.session_state["total_tokens"] + response["usage"]["total_tokens"]
+    st.session_state["completion_tokens"] = st.session_state["completion_tokens"] + response["usage"]['completion_tokens']
+    st.session_state["prompt_tokens"] = st.session_state["prompt_tokens"] + response["usage"]['prompt_tokens']
     return response["choices"][0]["message"]["content"]
