@@ -164,11 +164,11 @@ if submit:
 
         if suggestion == "Avec suggestions":
             st.success("Proposition de titres en cours...")
-            fact = better_titles(final_text, st.session_state.get("infos"))
+            suggestion_text = better_titles(final_text, st.session_state.get("infos"))
             with st.expander("Titres possibles", expanded=False):
-                st.write(fact)
+                st.write(suggestion_text)
 
-        cost = st.session_state["prompt_tokens"] * 0,00003 + st.session_state["completion_tokens"] * 0,00006
+        cost = st.session_state["prompt_tokens"] * 0.00003 + st.session_state["completion_tokens"] * 0.00006
         ts_end = perf_counter()
         st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
         st.write("Coût de l'article : " + str(cost) + " $")
