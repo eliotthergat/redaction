@@ -327,26 +327,6 @@ if submit:
             final_text = bold_keywords(final_text)
             with st.expander("Texte finalisé", expanded=False):
                 st.write(final_text)
-
-            col1, col2, col3 = st.columns([2, 2,1])
-            col3.download_button(
-                label="Télécharger 💾",
-                data=final_text,
-                file_name='texte.md',
-                mime='text/markdown',
-            )
-
-            if check == "Avec fact checking":
-                st.error("⚠️ Fact checking en cours...")
-                fact_check = fact_check(final_text)
-                with st.expander("Fact checking", expanded=False):
-                    st.write(fact_check)
-                
-            if suggestion == "Avec suggestions":
-                st.warning("Proposition de titres en cours...")
-                titles_to_add = better_titles(final_text, infos)
-                with st.expander("Titres à réviser", expanded=False):
-                        st.write(titles_to_add)
         if complete:
             st.success("12/12 - Mise en gras du texte...")
             final_text = bold_keywords(first_text)
