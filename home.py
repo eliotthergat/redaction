@@ -63,8 +63,6 @@ client = pills("", ["Médecin", "Éducation", "Agence"], ["🩺", "👨🏻‍�
 col1, col2, col3 = st.columns([2, 2,1])
 submit = col3.button("Rédiger ✍🏻", use_container_width=1)
     
-
-    
 if submit:
     define_client(client)
 
@@ -131,19 +129,15 @@ if submit:
         st.info("10/12 - Synthèse des connaissances acquises...")
         st.session_state["infos"] = concurrent_sumerizer(response_1, response_2, response_3)
         with st.expander("Synthèse", expanded=False):
-            st.write(st.session_state["infos"])
+            st.write(st.session_state.get("infos"))
 
         st.warning("11/12 - Rédaction du premier texte...")
-        first_text = writer(st.session_state["infos"], title, plan, keywords)
+        first_text = writer(st.session_state.get("infos"), title, plan, keywords)
         with st.expander("Texte brut", expanded=False):
             st.write(first_text)
 
-        col1, col2, col3 = st.columns([2, 1,1])
-        modifier = col2.button('Texte à compléter')
-        complete = col3.button('Texte complet')
-
         st.warning("11b/12 - Article en cours de correction...")
-        final_text = first_text + "\n" + completer(first_text, st.session_state["infos"], title, plan, keywords)
+        final_text = first_text + "\n" + completer(first_text, st.session_state.get("infos"), title, plan, keywords)
         with st.expander("Texte complet", expanded=False):
             st.write(final_text)
         st.success("12/12 - Mise en gras du texte...")
@@ -158,5 +152,18 @@ if submit:
             file_name='texte.md',
             mime='text/markdown',
         )
+        if check == "Avec fact checking":
+            st.error("Fact checking en cours...")
+            fact = fact_check(final_text)
+            with st.expander("Fact checking", expanded=False):
+                st.write(fact)
+
+        if suggestion == "Avec suggestions":
+            st.success("Proposition de titres en cours...")
+            fact = better_titles(final_text, st.session_state.get("infos"))
+            with st.expander("Titres possibles", expanded=False):
+                st.write(fact)
+
+
         ts_end = perf_counter()
         st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
