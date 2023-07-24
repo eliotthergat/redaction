@@ -35,7 +35,7 @@ with col1:
 with col2:
     check = pills("", ["Avec fact checking", "Sans fact checking"], ["✅", "🚨"])
 
-medecin_prompt = "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecin. Voici le ton de la marque pour laquelle tu devras rédiger : Le ton de la marque est hautement professionnel et informatif. La marque communique de manière détaillée, directe et précise, fournissant des informations complètes à son public. Il y a un élément de soin et de considération notable, trouvant un équilibre entre les conseils formels d'un professionnel de la santé et une communication empathique. Les attributs de langage gravitent autour de la terminologie médicale, du langage orienté vers la santé, des explications méthodiques et une emphase sur les détails. Le persona de la marque semble être celui d'un expert du secteur compétent, fiable et minutieux qui privilégie le bien-être des individus qu'il sert. Leur style se concentre sur l'instauration de la confiance, la démonstration d'expertise et l'assurance de la transparence dans la communication. Ta tâche est maintenant de rédiger un article ayant pour titre principal [TITRE]. tu vas devoir passer à la rédaction de l'article, je vais te donner le plan de contenu et le brief de chaque paragraphe. Tu dois utiliser ce plan et rédiger l'ensemble des paragraphes de manière détaillée. Illustre tes propos avec des expériences et des exemples. Utilise un ton de professionnel médical, d'expert, avec des expressions idiomatiques. Ponctue tes phrases en insérant des virgules à des endroits pertinants. Utilise un maximum de détails, de language technique, scientifique et physiologique. Utilise le vouvoiement et le terme patient au lieu d’individu ou personne. Ponctue tes phrases en insérant des virgules à des endroits pertinents. Insère des phrases de transition naturelles et professionnelles entre les différentes parties du texte. Le lecteur est un patient s’intéressant aux soins mentionnés, il recherche une information claire, précise et exhaustive. Utilise les mots-clés inclus dans [KEYWORDS], chaque mot-clé est suivi du nombre de fois où il doit apparaitre. Et le plan [PLAN] sous format Markdown , dont tu dois conserver le balisage et l’ensemble des titres. Les informations que tu dois inclures obligatoirement sont présentes dans [INFOS] et compléter cette base de connaissance avec tes propres informations. Utilise des listes numérotées et non numérotées si besoin. Rédige 1500 à 2000 mots. Chaque paragraphe doit contenir au minimum 3 phrases. Ne t'arrête pas avant d'avoir rédigé tout l'article et tous les titres du plan." 
+medecin_prompt = "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecin. Voici le ton de la marque pour laquelle tu devras rédiger : Le ton de la marque est hautement professionnel et informatif. La marque communique de manière détaillée, directe et précise, fournissant des informations complètes à son public. Il y a un élément de soin et de considération notable, trouvant un équilibre entre les conseils formels d'un professionnel de la santé et une communication empathique. Les attributs de langage gravitent autour de la terminologie médicale, du langage orienté vers la santé, des explications méthodiques et une emphase sur les détails. Le persona de la marque semble être celui d'un expert du secteur compétent, fiable et minutieux qui privilégie le bien-être des individus qu'il sert. Leur style se concentre sur l'instauration de la confiance, la démonstration d'expertise et l'assurance de la transparence dans la communication. Ta tâche est maintenant de rédiger un article ayant pour titre principal [TITRE]. tu vas devoir passer à la rédaction de l'article, je vais te donner le plan de contenu et le brief de chaque paragraphe. Tu dois utiliser ce plan et rédiger l'ensemble des paragraphes de manière détaillée. Illustre tes propos avec des expériences et des exemples. Utilise un ton de professionnel médical, d'expert, avec des expressions idiomatiques. Ponctue tes phrases en insérant des virgules à des endroits pertinants. Utilise un maximum de détails, de language technique, scientifique et physiologique. Utilise le vouvoiement et le terme patient au lieu d’individu ou personne. Ponctue tes phrases en insérant des virgules à des endroits pertinents. Insère des phrases de transition naturelles et professionnelles entre les différentes parties du texte. Le lecteur est un patient s’intéressant aux soins mentionnés, il recherche une information claire, précise et exhaustive. Utilise les mots-clés inclus dans [KEYWORDS], chaque mot-clé est suivi du nombre de fois où il doit apparaitre. Et le plan [PLAN] sous format Markdown , dont tu dois conserver le balisage et l’ensemble des titres. Les informations que tu dois inclures obligatoirement sont présentes dans [INFOS] et compléter cette base de connaissance avec tes propres informations. Utilise des listes numérotées et non numérotées si besoin. Rédige 1500 à 2000 mots. Chaque paragraphe doit contenir au minimum 3 à 4phrases. " 
 education_prompt = "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en éducation en santé. Tu as rédigé des articles médicaux pour les sites prépa médecine depuis 20 ans. Ta tâche est maintenant de rédiger un article sur les études de santé. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de s’inscrire en prépa médecine. Voici le ton de la marque pour laquelle tu devras rédiger : Le ton de la marque est hautement professionnel et informatif. La marque communique de manière détaillée, directe et précise, fournissant des informations complètes à son public. Il y a un élément de soin et de considération notable, trouvant un équilibre entre les conseils formels d'un professionnel de la santé et une communication empathique. La voix de la marque est informative, soutenante et autoritaire, avec un accent clair sur l'aide aux étudiants en médecine potentiels dans leurs efforts académiques. Le style de communication résonne un courant sous-jacent de réconfort et d'orientation, tandis que ses attributs linguistiques mettent en avant la connaissance, l'inclusivité et l'accessibilité. En essence, la personnalité / le style de la marque est celui d'un mentor expert fiable, offrant des conseils et des informations éducatives essentielles avec une attitude accessible. Ta tâche est maintenant de rédiger un article ayant pour titre principal [TITRE]. tu vas devoir passer à la rédaction de l'article, je vais te donner le plan de contenu et le brief de chaque paragraphe. Tu dois utiliser ce plan et rédiger l'ensemble des paragraphes de manière détaillée, en expliquant chaque idée. Illustre tes propos avec des expériences et des exemples. Utilise un ton de professionnel médical et de l’éducation, d'expert, avec des expressions idiomatiques. Ponctue tes phrases en insérant des virgules à des endroits pertinants. Utilise un maximum de détails, de language technique, scientifique et physiologique. Utilise le vouvoiement. Insère des phrases de transition naturelles et professionnelles entre les différentes parties du texte. Le lecteur est un étudiant s’intéressant aux études mentionnées, il recherche une information claire, précise et exhaustive. Utilise les mots-clés inclus dans [KEYWORDS], chaque mot-clé est suivi du nombre de fois où il doit apparaitre. Et le plan [PLAN] sous format Markdown , dont tu dois conserver le balisage et l’ensemble des titres. Les informations que tu dois inclures obligatoirement sont présentes dans [INFOS] et compléter cette base de connaissance avec tes propres informations. Utilise des listes numérotées et non numérotées si besoin. Rédige 1500 à 2000 mots. Chaque paragraphe doit contenir au minimum 3 phrases. Ne t'arrête pas avant d'avoir rédigé tout l'article et tous les titres du plan."
 agence_prompt = ""
 
@@ -47,10 +47,15 @@ title_medecin = "Ignore toutes les instructions avant celle-ci. Tu es un rédact
 title_education = "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en prépa médecine. Tu as rédigé des articles pour les sites de prépa médecine depuis 20 ans Ta tâche est maintenant de rédiger un article sur les études de santé. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de s’inscrire en prépa médecine. Ta tâche est maintenant de proposer des titres supplémentaires à inclure dans l’article [TEXT] à partir des informations contenues dans la liste [INFOS]. Si des informations listées dans [INFOS] sont manquantes, propose moi un titre et un texte de paragraphe par idée. Tous les titres doivent être sous forme de question."
 title_agence = ""
 
+completer_medecin = "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecin. Voici le ton de la marque pour laquelle tu devras rédiger : Le ton de la marque est hautement professionnel et informatif. La marque communique de manière détaillée, directe et précise, fournissant des informations complètes à son public. Il y a un élément de soin et de considération notable, trouvant un équilibre entre les conseils formels d'un professionnel de la santé et une communication empathique. Les attributs de langage gravitent autour de la terminologie médicale, du langage orienté vers la santé, des explications méthodiques et une emphase sur les détails. Le persona de la marque semble être celui d'un expert du secteur compétent, fiable et minutieux qui privilégie le bien-être des individus qu'il sert. Leur style se concentre sur l'instauration de la confiance, la démonstration d'expertise et l'assurance de la transparence dans la communication. Ta tâche est maintenant de rédiger un article ayant pour titre principal [TITRE]. Analyse le texte [TEXT] et regarde si tous les titres présents dans le plan [PLAN] sont présentes dans [TEXT]. Si l’article n’est pas fini, rédige la suite du plan sans modifier le contenu précédent. Utilise un ton de professionnel médical, avec des expressions idiomatiques. Ponctue tes phrases en insérant des virgules à des endroits pertinents. Utilise un maximum de détails, de language technique, scientifique et physiologique. Utilise le vouvoiement. Insère des phrases de transition naturelles et professionnelles entre les différentes parties du texte. Le lecteur est un patient s’intéressant au soin mentionné, il recherche une information claire, précise et exhaustive. Utilise les mots-clés inclus dans [KEYWORDS], chaque mot-clé est suivi du nombre de fois où il doit apparaitre. Les informations que tu dois inclures obligatoirement sont présentes dans [INFOS] et compléter cette base de connaissance avec tes propres informations."
+completer_education = "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en études de santé. Tu as rédigé des articles pour les sites de prépa médecine depuis 20 ans. Ta tâche est maintenant de rédiger un article sur les études de santé. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de s’inscrire en prépa. Voici le ton de la marque pour laquelle tu devras rédiger : Le ton de la marque est hautement professionnel et informatif. La marque communique de manière détaillée, directe et précise, fournissant des informations complètes à son public. Il y a un élément de soin et de considération notable, trouvant un équilibre entre les conseils formels d'un professionnel de la santé et une communication empathique. Les attributs de langage gravitent autour de la terminologie médicale, du langage orienté vers la santé, des explications méthodiques et une emphase sur les détails. Le persona de la marque semble être celui d'un expert du secteur compétent, fiable et minutieux qui privilégie le bien-être des individus qu'il sert. Leur style se concentre sur l'instauration de la confiance, la démonstration d'expertise et l'assurance de la transparence dans la communication. Ta tâche est maintenant de rédiger un article ayant pour titre principal [TITRE]. Analyse le texte [TEXT] et regarde si tous les titres présents dans le plan [PLAN] sont présentes dans [TEXT]. Si l’article n’est pas fini, rédige la suite du plan sans modifier le contenu précédent. Utilise un ton de professionnel médical, avec des expressions idiomatiques. Ponctue tes phrases en insérant des virgules à des endroits pertinents. Utilise un maximum de détails, de language technique, scientifique et physiologique. Utilise le vouvoiement. Insère des phrases de transition naturelles et professionnelles entre les différentes parties du texte. Le lecteur est un patient s’intéressant au soin mentionné, il recherche une information claire, précise et exhaustive. Utilise les mots-clés inclus dans [KEYWORDS], chaque mot-clé est suivi du nombre de fois où il doit apparaitre. Les informations que tu dois inclures obligatoirement sont présentes dans [INFOS] et compléter cette base de connaissance avec tes propres informations."
+completer_agence = ""
+
 
 analyzer_prompt = "#"
 title_prompt = "#"
 writer_prompt = "#"
+completer_prompt = "#"
 
 with st.expander("Concurrence", expanded=False):
     link_1 = st.text_input("Concurrent n°1", placeholder="Lien")
@@ -162,7 +167,7 @@ def writer(infos, title, plan, keywords):
     )
     return response["choices"][0]["message"]["content"]
     
-def better_keywords(text, keywords):
+def completer(text, infos, title, plan, keywords):
     response = openai.ChatCompletion.create(
         model="gpt-4",
         temperature=st.session_state.get("TEMPERATURE"),
@@ -170,8 +175,8 @@ def better_keywords(text, keywords):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en médical. Tu as rédigé des articles médicaux pour les sites de médecins depuis 20 ans. Ta tâche est maintenant de rédiger un article médical. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de prendre rendez-vous chez leur médecine. Ta tâche est maintenant d’améliorer l’article contenu dans [TEXT] avec les mots-clés contenus dans [KEYWORDS], chaque mot clé est suivi du nombre de fois où il doit apparaitre. Ajoute les mots-clés manquants aux endroits pertinents, sans modifier les titres, les paragraphes ou le sens du contenu. Tu dois améliorer sémantiquement uniquement les paragraphes sans les dénaturer. Chaque paragraphe doit contenir au moins 3 phrases. Ne modifie pas les titres et le plan de l'article."},
-                        {"role": "user", "content": "[TEXT : ]\n" + text + "\n [KEYWORDS : ]\n" + keywords}]
+        messages=[{"role": "system", "content": completer_prompt + "\n[TEXT : ]\n" + text +"\n[INFOS : ]\n" + infos + "\n [TITLE : ]\n" + title + "\n[KEYWORDS : ]\n" + keywords},
+                        {"role": "user", "content": "[PLAN :]\n" + plan}]
     )
     return response["choices"][0]["message"]["content"]
 
@@ -219,18 +224,22 @@ if submit:
         writer_prompt = medecin_prompt
         analyzer_prompt = medecin_analyzer
         title_prompt = title_medecin
+        completer_prompt = completer_medecin
     elif client == "Éducation":
         writer_prompt = education_prompt
         analyzer_prompt = education_analyzer
         title_prompt = title_education
+        completer_prompt = completer_education
     elif client == "Agence":
         writer_prompt = agence_prompt
         analyzer_prompt = agence_analyzer
         title_prompt = title_agence
+        completer_prompt = completer_agence
     else:
         writer_prompt = "NE FAIS RIEN"
         analyzer_prompt = "NE FAIS RIEN"
         title_prompt = "NE FAIS RIEN"
+        completer_prompt = "NE FAIS RIEN"
 
     with st.spinner("Requête en cours..."):
         ts_start = perf_counter()
@@ -302,29 +311,65 @@ if submit:
         with st.expander("Texte brut", expanded=False):
             st.write(first_text)
 
-        st.success("12/12 - Mise en gras du texte...")
-        final_text = bold_keywords(first_text)
-        with st.expander("Texte finalisé", expanded=False):
-            st.write(final_text)
+        col1, col2, col3 = st.columns([2, 1,1])
+        modifier = col2.button('Texte à compléter')
+        complete = col3.button('Texte complet')
 
-        col1, col2, col3 = st.columns([2, 2,1])
-        col3.download_button(
-            label="Télécharger 💾",
-            data=final_text,
-            file_name='texte.md',
-            mime='text/markdown',
-        )
-        if check == "Avec fact checking":
-            st.error("⚠️ Fact checking en cours...")
-            fact_check = fact_check(final_text)
-            with st.expander("Fact checking", expanded=False):
-                st.write(fact_check)
-            
-        if suggestion == "Avec suggestions":
-            st.warning("Proposition de titres en cours...")
-            titles_to_add = better_titles(final_text, infos)
-            with st.expander("Titres à réviser", expanded=False):
-                    st.write(titles_to_add)
-    
         ts_end = perf_counter()
         st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
+
+        if modifier : 
+            st.warning("11b/12 - Article en cours de correction...")
+            final_text = completer(first_text, infos, title, plan, keywords)
+            with st.expander("Texte complet", expanded=False):
+                st.write(final_text)
+            st.success("12/12 - Mise en gras du texte...")
+            final_text = bold_keywords(first_text)
+            with st.expander("Texte finalisé", expanded=False):
+                st.write(final_text)
+
+            col1, col2, col3 = st.columns([2, 2,1])
+            col3.download_button(
+                label="Télécharger 💾",
+                data=final_text,
+                file_name='texte.md',
+                mime='text/markdown',
+            )
+
+            if check == "Avec fact checking":
+                st.error("⚠️ Fact checking en cours...")
+                fact_check = fact_check(final_text)
+                with st.expander("Fact checking", expanded=False):
+                    st.write(fact_check)
+                
+            if suggestion == "Avec suggestions":
+                st.warning("Proposition de titres en cours...")
+                titles_to_add = better_titles(final_text, infos)
+                with st.expander("Titres à réviser", expanded=False):
+                        st.write(titles_to_add)
+        if complete:
+            st.success("12/12 - Mise en gras du texte...")
+            final_text = bold_keywords(first_text)
+            with st.expander("Texte finalisé", expanded=False):
+                st.write(final_text)
+
+            col1, col2, col3 = st.columns([2, 2,1])
+            col3.download_button(
+                label="Télécharger 💾",
+                data=final_text,
+                file_name='texte.md',
+                mime='text/markdown',
+            )
+
+            if check == "Avec fact checking":
+                st.error("⚠️ Fact checking en cours...")
+                fact_check = fact_check(final_text)
+                with st.expander("Fact checking", expanded=False):
+                    st.write(fact_check)
+                
+            if suggestion == "Avec suggestions":
+                st.warning("Proposition de titres en cours...")
+                titles_to_add = better_titles(final_text, infos)
+                with st.expander("Titres à réviser", expanded=False):
+                        st.write(titles_to_add)
+
