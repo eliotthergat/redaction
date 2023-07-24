@@ -35,7 +35,6 @@ with col1:
 with col2:
     check = pills("", ["Avec fact checking", "Sans fact checking"], ["✅", "🚨"])
 
-client = pills("", ["Médecin", "Éducation", "HOF"], ["🩺", "👨🏻‍🏫", "🔥"])
 
 with st.expander("Concurrence", expanded=False):
     link_1 = st.text_input("Concurrent n°1", placeholder="Lien")
@@ -50,7 +49,7 @@ with st.expander("Plan de contenu", expanded=False):
     plan = st.text_area("Plan", placeholder="Le plan de l'article")
     keywords = st.text_area("Mots-clés", placeholder="Les mots-clés à utiliser")
 
-
+client = pills("", ["Médecin", "Éducation", "HOF"], ["🩺", "👨🏻‍🏫", "🔥"])
 col1, col2, col3 = st.columns([2, 2,1])
 submit = col3.button("Rédiger ✍🏻", use_container_width=1)
 
