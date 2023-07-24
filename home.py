@@ -168,6 +168,7 @@ if submit:
             with st.expander("Titres possibles", expanded=False):
                 st.write(fact)
 
-
+        cost = st.session_state["prompt_tokens"] * 0,00003 + st.session_state["completion_tokens"] * 0,00006
         ts_end = perf_counter()
         st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
+        st.write("Coût de l'article : " + str(cost) + " $")
