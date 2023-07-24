@@ -1,13 +1,11 @@
 import os
 import openai
 import streamlit as st
-import requests
-from bs4 import BeautifulSoup
-import markdownify
-from time import perf_counter
 from dotenv import load_dotenv
 
-def concurrent_analyzer(text, plan ):
+load_dotenv()
+
+def fact_check(text):
     response = openai.ChatCompletion.create(
         model="gpt-4",
         temperature=st.session_state.get("TEMPERATURE"),
@@ -15,7 +13,7 @@ def concurrent_analyzer(text, plan ):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": st.session_state.get("analyzer_prompt")},
-                        {"role": "user", "content": "[TEXT]\n" + text + "[PLAN]\n" + plan}]
+        messages=[{"role": "system", "content": "Tu es médecin expert. Existe-t-il des informations médicalement inexactes dans ce texte ? "},
+                        {"role": "user", "content": "[TEXT : ]\n" + text}]
     )
     return response["choices"][0]["message"]["content"]

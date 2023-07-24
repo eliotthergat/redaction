@@ -17,6 +17,7 @@ from functions.define_client import define_client
 from functions.concurrent_sumerizer import concurrent_sumerizer
 from functions.bolder_keywords import bold_keywords
 from functions.better_titles import better_titles
+from functions.fact_check import fact_check
 
 st.set_page_config(
     page_title="Khontenu",
@@ -73,20 +74,6 @@ def completer(text, infos, title, plan, keywords):
                         {"role": "user", "content": "[PLAN :]\n" + plan}]
     )
     return response["choices"][0]["message"]["content"]
-
-
-def fact_check(text):
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        temperature=st.session_state.get("TEMPERATURE"),
-        max_tokens=st.session_state.get("MAX_TOKENS"),
-        top_p=1,
-        frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
-        presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": "Tu es médecin expert. Existe-t-il des informations médicalement inexactes dans ce texte ? "},
-                        {"role": "user", "content": "[TEXT : ]\n" + text}]
-    )
-    return response["choices"][0]["message"]["content"]
     
 if submit:
     define_client(client)
@@ -109,7 +96,7 @@ if submit:
     
         col1, col2 = st.columns([1, 2])
         col1.info("3/12 - Analyse de l'article...")
-        response_1 = concurrent_analyzer(text_1)
+        response_1 = concurrent_analyzer(text_1, plan)
         with col2.expander("Analyse n°1", expanded=False):
             st.write(response_1) 
         
@@ -128,7 +115,7 @@ if submit:
     
         col1, col2 = st.columns([1, 2])
         col1.info("6/12 - Analyse de l'article...")
-        response_2 = concurrent_analyzer(text_2)
+        response_2 = concurrent_analyzer(text_2, plan)
         with col2.expander("Analyse n°2", expanded=False):
             st.write(response_2)
     
@@ -147,7 +134,7 @@ if submit:
             
         col1, col2 = st.columns([1, 2])
         col1.info("9/12 - Analyse de l'article...")
-        response_3 = concurrent_analyzer(text_3)
+        response_3 = concurrent_analyzer(text_3, plan)
         with col2.expander("Analyse n°3", expanded=False):
             st.write(response_3)
             
