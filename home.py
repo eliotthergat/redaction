@@ -10,6 +10,8 @@ from streamlit_pills import pills
 
 from components.sidebar import sidebar
 from functions.writer import writer
+from functions.markdown_generator import markdown_generator
+from functions.parser import parser
 
 st.set_page_config(
     page_title="Khontenu",
@@ -53,10 +55,10 @@ completer_education = "Ignore toutes les instructions avant celle-ci. Tu es un r
 completer_agence = ""
 
 
-analyzer_prompt = "#"
-title_prompt = "#"
-writer_prompt = "#"
-completer_prompt = "#"
+st.session_state["analyzer_prompt"] = "#"
+st.session_state["title_prompt"] = "#"
+st.session_state["writer_prompt"] = "#"
+st.session_state["completer_prompt"] = "#"
 
 with st.expander("Concurrence", expanded=False):
     link_1 = st.text_input("Concurrent n°1", placeholder="Lien")
@@ -75,59 +77,6 @@ with st.expander("Plan de contenu", expanded=False):
 client = pills("", ["Médecin", "Éducation", "Agence"], ["🩺", "👨🏻‍🏫", "💸"])
 col1, col2, col3 = st.columns([2, 2,1])
 submit = col3.button("Rédiger ✍🏻", use_container_width=1)
-
-def parser(link):
-    res = requests.get(link)
-    html_page = res.content
-    soup = BeautifulSoup(html_page, 'html.parser')
-    tags = soup.findAll('img')
-    for match in tags:
-        match.decompose()
-    tags = soup.findAll('picture')
-    for match in tags:
-        match.decompose()
-    tags = soup.findAll('head')
-    for match in tags:
-        match.decompose()
-    tags = soup.findAll('header')
-    for match in tags:
-        match.decompose()
-    tags = soup.findAll('script')
-    for match in tags:
-        match.decompose()
-    tags = soup.findAll('noscript')
-    for match in tags:
-        match.decompose()
-    tags = soup.findAll('a')
-    for match in tags:
-        del match["href"]
-    tags = soup.findAll('div')
-    for match in tags:
-        del match["class"]
-        del match["id"]
-        del match["role"]
-    
-    if str(soup.find('article')) != 'None':
-        main = soup.find('article')
-    elif str(soup.find('main')) != 'None':
-        main = soup.find('main')
-    else:
-        main = soup.find('body')
-    cleaned_html = str(main)
-    markdown_text = markdownify.markdownify(cleaned_html)
-    return markdown_text
-def markdown_generator(text):
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        temperature=st.session_state.get("TEMPERATURE"),
-        max_tokens=st.session_state.get("MAX_TOKENS"),
-        top_p=1,
-        frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
-        presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": "À partir du code markdown suivant, extraies l'article principal sous format markdown. Ne conserve que les H1, H2, H3, H4, H5, H6, les paragraphes et les listes contenues dans le corps principal de l'article. Supprime le contenu avec le H1, les sections à lire également, les sections photos et avants/après, catégories, les crédits, etc..."},
-                        {"role": "user", "content": text}]
-    )
-    return response["choices"][0]["message"]["content"]
     
 def concurrent_analyzer(text):
     response = openai.ChatCompletion.create(
@@ -137,7 +86,7 @@ def concurrent_analyzer(text):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": analyzer_prompt},
+        messages=[{"role": "system", "content": st.session_state["analyzer_prompt"]},
                         {"role": "user", "content": text}]
     )
     return response["choices"][0]["message"]["content"]
@@ -163,7 +112,7 @@ def completer(text, infos, title, plan, keywords):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": completer_prompt + "\n[TEXT : ]\n" + text +"\n[INFOS : ]\n" + infos + "\n [TITLE : ]\n" + title + "\n[KEYWORDS : ]\n" + keywords},
+        messages=[{"role": "system", "content": st.session_state["completer_prompt"] + "\n[TEXT : ]\n" + text +"\n[INFOS : ]\n" + st.session_state["infos"] + "\n [TITLE : ]\n" + title + "\n[KEYWORDS : ]\n" + keywords},
                         {"role": "user", "content": "[PLAN :]\n" + plan}]
     )
     return response["choices"][0]["message"]["content"]
@@ -189,8 +138,8 @@ def better_titles(text, infos):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": title_prompt},
-                        {"role": "user", "content": "[TEXT : ]\n" + text + "\n [INFOS : ]\n" + infos}]
+        messages=[{"role": "system", "content": st.session_state["title_prompt"]},
+                        {"role": "user", "content": "[TEXT : ]\n" + text + "\n [INFOS : ]\n" + st.session_state["infos"]}]
     )
     return response["choices"][0]["message"]["content"]
 
@@ -209,25 +158,25 @@ def fact_check(text):
     
 if submit:
     if client == "Médecin":
-        writer_prompt = medecin_prompt
-        analyzer_prompt = medecin_analyzer
-        title_prompt = title_medecin
-        completer_prompt = completer_medecin
+        st.session_state["writer_prompt"] = medecin_prompt
+        st.session_state["analyzer_prompt"] = medecin_analyzer
+        st.session_state["title_prompt"] = title_medecin
+        st.session_state["completer_prompt"] = completer_medecin
     elif client == "Éducation":
-        writer_prompt = education_prompt
-        analyzer_prompt = education_analyzer
-        title_prompt = title_education
-        completer_prompt = completer_education
+        st.session_state["writer_prompt"] = education_prompt
+        st.session_state["analyzer_prompt"] = education_analyzer
+        st.session_state["title_prompt"] = title_education
+        st.session_state["completer_prompt"] = completer_education
     elif client == "Agence":
-        writer_prompt = agence_prompt
-        analyzer_prompt = agence_analyzer
-        title_prompt = title_agence
-        completer_prompt = completer_agence
+        st.session_state["writer_prompt"] = agence_prompt
+        st.session_state["analyzer_prompt"] = agence_analyzer
+        st.session_state["title_prompt"] = title_agence
+        st.session_state["completer_prompt"] = completer_agence
     else:
-        writer_prompt = "NE FAIS RIEN"
-        analyzer_prompt = "NE FAIS RIEN"
-        title_prompt = "NE FAIS RIEN"
-        completer_prompt = "NE FAIS RIEN"
+        st.session_state["writer_prompt"] = "NE FAIS RIEN"
+        st.session_state["analyzer_prompt"] = "NE FAIS RIEN"
+        st.session_state["title_prompt"] = "NE FAIS RIEN"
+        st.session_state["completer_prompt"] = "NE FAIS RIEN"
 
     with st.spinner("Requête en cours..."):
         ts_start = perf_counter()
@@ -290,12 +239,12 @@ if submit:
             st.write(response_3)
             
         st.info("10/12 - Synthèse des connaissances acquises...")
-        infos = concurrent_sumerizer(response_1, response_2, response_3)
+        st.session_state["infos"] = concurrent_sumerizer(response_1, response_2, response_3)
         with st.expander("Synthèse", expanded=False):
-            st.write(infos)
+            st.write(st.session_state["infos"])
 
         st.warning("11/12 - Rédaction du premier texte...")
-        first_text = writer(infos, title, plan, keywords)
+        first_text = writer(st.session_state["infos"], title, plan, keywords)
         with st.expander("Texte brut", expanded=False):
             st.write(first_text)
 
@@ -304,7 +253,7 @@ if submit:
         complete = col3.button('Texte complet')
 
         st.warning("11b/12 - Article en cours de correction...")
-        final_text = first_text + "\n" + completer(first_text, infos, title, plan, keywords)
+        final_text = first_text + "\n" + completer(first_text, st.session_state["infos"], title, plan, keywords)
         with st.expander("Texte complet", expanded=False):
             st.write(final_text)
         st.success("12/12 - Mise en gras du texte...")

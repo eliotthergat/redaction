@@ -8,7 +8,6 @@ load_dotenv()
 
 def sidebar():
     with st.sidebar:
-        st.image('assets/logo.svg')
         st.markdown(
                 "## Comment fonctionne Khontenu ?\n"
                 "1. 🔑 Entrez une clé OpenAI \n"
