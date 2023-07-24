@@ -214,22 +214,24 @@ def fact_check(text):
     return response["choices"][0]["message"]["content"]
     
 if submit:
-    if client == "Médecin":
-        writer_prompt = medecin_prompt
-        analyzer_prompt = medecin_analyzer
-        title_prompt = title_medecin
-        elif client == "Éducation":
+    match client:
+        case "Médecin":
+            writer_prompt = medecin_prompt
+            analyzer_prompt = medecin_analyzer
+            title_prompt = title_medecin
+        case "Éducation":
             writer_prompt = education_prompt
             analyzer_prompt = education_analyzer
             title_prompt = title_education
-        elif client == "HOF":
+        case "HOF":
             writer_prompt = hof_prompt
             analyzer_prompt = hof_analyzer
             title_prompt = title_hof
-        else:
+        case _:
             writer_prompt = "NE FAIS RIEN"
             analyzer_prompt = "NE FAIS RIEN"
             title_prompt = "NE FAIS RIEN"
+    
     with st.spinner("Requête en cours..."):
             ts_start = perf_counter()
         
