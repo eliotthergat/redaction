@@ -65,11 +65,6 @@ submit = col3.button("Rédiger ✍🏻", use_container_width=1)
     
 if submit:
     define_client(client)
-    if check == "Avec fact checking":
-        st.error("Fact checking en cours...")
-        #fact = fact_check(final_text)
-        #with st.expander("Fact checking", expanded=False):
-                #st.write(fact)
 
     st.session_state["total_tokens"] = 0
     st.session_state["completion_tokens"] = 0
@@ -177,3 +172,28 @@ if submit:
         st.info(f" {round(((ts_end - ts_start)/60), 3)} minutes d'exécution")
         cost = st.session_state["prompt_tokens"] * 0.00003 + st.session_state["completion_tokens"] * 0.00006
         st.write("Coût de l'article : " + str(cost) + " $")
+        col1, col2, col3 = st.columns([2, 2,1])
+        rewrite = col3.button("Réécrire ✍🏻", use_container_width=1)
+
+    if rewrite:
+        st.warning("11c/12 - Rédaction du premier texte...")
+        first_text = writer(st.session_state.get("infos"), title, plan, keywords)
+        with st.expander("Texte brut", expanded=False):
+            st.write(first_text)
+
+        st.warning("11d/12 - Article en cours de correction...")
+        final_text = first_text + "\n" + completer(first_text, st.session_state.get("infos"), title, plan, keywords)
+        with st.expander("Texte complet", expanded=False):
+            st.write(final_text)
+        st.success("12/12 - Mise en gras du texte...")
+        final_text = bold_keywords(final_text)
+        with st.expander("Texte finalisé", expanded=False):
+            st.write(final_text)
+
+        col1, col2, col3 = st.columns([2, 2,1])
+        col3.download_button(
+            label="Télécharger 💾",
+            data=final_text,
+            file_name='texte.md',
+            mime='text/markdown',
+        )
