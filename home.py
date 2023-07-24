@@ -234,7 +234,7 @@ if submit:
     with st.spinner("Requête en cours..."):
         ts_start = perf_counter()
     
-        st.markdown("### Traitement du 1er article...")
+        st.markdown("### Traitement du 1er article")
         col1, col2 = st.columns([1, 2])
         col1.info("1/12 - Scrapping de l'article...")
         text_1 = parser(link_1)
@@ -253,7 +253,7 @@ if submit:
         with col2.expander("Analyse n°1", expanded=False):
             st.write(response_1) 
         
-        st.markdown("### Traitement du 2ème article...")
+        st.markdown("### Traitement du 2ème article")
         col1, col2 = st.columns([1, 2])
         col1.info("4/12 - Scrapping de l'article...")
         text_2 = parser(link_2)
@@ -272,7 +272,7 @@ if submit:
         with col2.expander("Analyse n°2", expanded=False):
             st.write(response_2)
     
-        st.markdown("### Traitement du 3ème article...")
+        st.markdown("### Traitement du 3ème article")
         col1, col2 = st.columns([1, 2])
         col1.info("7/12 - Scrapping de l'article...")
         text_3 = parser(link_3)
@@ -302,7 +302,7 @@ if submit:
             st.write(first_text)
 
         st.success("12/12 - Mise en gras du texte...")
-        final_text = bold_keywords(first)
+        final_text = bold_keywords(first_text)
         with st.expander("Texte finalisé", expanded=False):
             st.write(final_text)
 
