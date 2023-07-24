@@ -214,116 +214,116 @@ def fact_check(text):
     return response["choices"][0]["message"]["content"]
     
 if submit:
-        if client == "Médecin":
-            writer_prompt = medecin_prompt
-            analyzer_prompt = medecin_analyzer
-            title_prompt = title_medecin
-        elif client == "Éducation":
-            writer_prompt = education_prompt
-            analyzer_prompt = education_analyzer
-            title_prompt = title_education
-        elif client == "HOF":
-            writer_prompt = hof_prompt
-            analyzer_prompt = hof_analyzer
-            title_prompt = title_hof
-        else:
-            writer_prompt = "NE FAIS RIEN"
-            analyzer_prompt = "NE FAIS RIEN"
-            title_prompt = "NE FAIS RIEN"
-    
+    if client == "Médecin":
+        writer_prompt = medecin_prompt
+        analyzer_prompt = medecin_analyzer
+        title_prompt = title_medecin
+    elif client == "Éducation":
+        writer_prompt = education_prompt
+        analyzer_prompt = education_analyzer
+        title_prompt = title_education
+    elif client == "HOF":
+        writer_prompt = hof_prompt
+        analyzer_prompt = hof_analyzer
+        title_prompt = title_hof
+    else:
+        writer_prompt = "NE FAIS RIEN"
+        analyzer_prompt = "NE FAIS RIEN"
+        title_prompt = "NE FAIS RIEN"
+
     with st.spinner("Requête en cours..."):
-            ts_start = perf_counter()
-        
-            st.markdown("### Traitement du 1er article...")
-            col1, col2 = st.columns([1, 2])
-            col1.info("1/12 - Scrapping de l'article...")
-            text_1 = parser(link_1)
-            with col2.expander("Texte n°1", expanded=False):
-                st.write(text_1)
+        ts_start = perf_counter()
+    
+        st.markdown("### Traitement du 1er article...")
+        col1, col2 = st.columns([1, 2])
+        col1.info("1/12 - Scrapping de l'article...")
+        text_1 = parser(link_1)
+        with col2.expander("Texte n°1", expanded=False):
+            st.write(text_1)
 
-            col1, col2 = st.columns([1, 2])
-            col1.info("2/12 - Data cleaning...")
-            text_1 = markdown_generator(text_1)
-            with col2.expander("Texte nettoyé n°1", expanded=False):
-                st.write(text_1)
+        col1, col2 = st.columns([1, 2])
+        col1.info("2/12 - Data cleaning...")
+        text_1 = markdown_generator(text_1)
+        with col2.expander("Texte nettoyé n°1", expanded=False):
+            st.write(text_1)
+    
+        col1, col2 = st.columns([1, 2])
+        col1.info("3/12 - Analyse de l'article...")
+        response_1 = concurrent_analyzer(text_1)
+        with col2.expander("Analyse n°1", expanded=False):
+            st.write(response_1) 
         
-            col1, col2 = st.columns([1, 2])
-            col1.info("3/12 - Analyse de l'article...")
-            response_1 = concurrent_analyzer(text_1)
-            with col2.expander("Analyse n°1", expanded=False):
-                st.write(response_1) 
+        st.markdown("### Traitement du 2ème article...")
+        col1, col2 = st.columns([1, 2])
+        col1.info("4/12 - Scrapping de l'article...")
+        text_2 = parser(link_2)
+        with col2.expander("Texte n°2", expanded=False):
+            st.write(text_2)
+
+        col1, col2 = st.columns([1, 2])
+        col1.info("5/12 - Data cleaning...")
+        text_2 = markdown_generator(text_2)
+        with col2.expander("Texte nettoyé n°2", expanded=False):
+            st.write(text_2)
+    
+        col1, col2 = st.columns([1, 2])
+        col1.info("6/12 - Analyse de l'article...")
+        response_2 = concurrent_analyzer(text_2)
+        with col2.expander("Analyse n°2", expanded=False):
+            st.write(response_2)
+    
+        st.markdown("### Traitement du 3ème article...")
+        col1, col2 = st.columns([1, 2])
+        col1.info("7/12 - Scrapping de l'article...")
+        text_3 = parser(link_3)
+        with col2.expander("Texte n°3", expanded=False):
+            st.write(text_3)
+
+        col1, col2 = st.columns([1, 2])
+        col1.info("8/12 - Data cleaning...")
+        text_3 = markdown_generator(text_3)
+        with col2.expander("Texte nettoyé n°3", expanded=False):
+            st.write(text_3)
             
-            st.markdown("### Traitement du 2ème article...")
-            col1, col2 = st.columns([1, 2])
-            col1.info("4/12 - Scrapping de l'article...")
-            text_2 = parser(link_2)
-            with col2.expander("Texte n°2", expanded=False):
-                st.write(text_2)
+        col1, col2 = st.columns([1, 2])
+        col1.info("9/12 - Analyse de l'article...")
+        response_3 = concurrent_analyzer(text_3)
+        with col2.expander("Analyse n°3", expanded=False):
+            st.write(response_3)
+            
+        st.info("10/12 - Synthèse des connaissances acquises...")
+        infos = concurrent_sumerizer(response_1, response_2, response_3)
+        with st.expander("Synthèse", expanded=False):
+            st.write(infos)
 
-            col1, col2 = st.columns([1, 2])
-            col1.info("5/12 - Data cleaning...")
-            text_2 = markdown_generator(text_2)
-            with col2.expander("Texte nettoyé n°2", expanded=False):
-                st.write(text_2)
-        
-            col1, col2 = st.columns([1, 2])
-            col1.info("6/12 - Analyse de l'article...")
-            response_2 = concurrent_analyzer(text_2)
-            with col2.expander("Analyse n°2", expanded=False):
-                st.write(response_2)
-        
-            st.markdown("### Traitement du 3ème article...")
-            col1, col2 = st.columns([1, 2])
-            col1.info("7/12 - Scrapping de l'article...")
-            text_3 = parser(link_3)
-            with col2.expander("Texte n°3", expanded=False):
-                st.write(text_3)
+        st.warning("11/12 - Rédaction du premier texte...")
+        first_text = writer(infos, title, plan, keywords)
+        with st.expander("Texte brut", expanded=False):
+            st.write(first_text)
 
-            col1, col2 = st.columns([1, 2])
-            col1.info("8/12 - Data cleaning...")
-            text_3 = markdown_generator(text_3)
-            with col2.expander("Texte nettoyé n°3", expanded=False):
-                st.write(text_3)
-                
-            col1, col2 = st.columns([1, 2])
-            col1.info("9/12 - Analyse de l'article...")
-            response_3 = concurrent_analyzer(text_3)
-            with col2.expander("Analyse n°3", expanded=False):
-                st.write(response_3)
-                
-            st.info("10/12 - Synthèse des connaissances acquises...")
-            infos = concurrent_sumerizer(response_1, response_2, response_3)
-            with st.expander("Synthèse", expanded=False):
-                st.write(infos)
+        st.success("12/12 - Mise en gras du texte...")
+        final_text = bold_keywords(first)
+        with st.expander("Texte finalisé", expanded=False):
+            st.write(final_text)
 
-            st.warning("11/12 - Rédaction du premier texte...")
-            first_text = writer(infos, title, plan, keywords)
-            with st.expander("Texte brut", expanded=False):
-                st.write(first_text)
-
-            st.success("12/12 - Mise en gras du texte...")
-            final_text = bold_keywords(first)
-            with st.expander("Texte finalisé", expanded=False):
-                st.write(final_text)
-
-            col1, col2, col3 = st.columns([2, 2,1])
-            col3.download_button(
-                label="Télécharger 💾",
-                data=final_text,
-                file_name='texte.md',
-                mime='text/markdown',
-            )
-            if check == "Avec fact checking":
-                st.error("⚠️ Fact checking en cours...")
-                fact_check = fact_check(final_text)
-                with st.expander("Fact checking", expanded=False):
-                    st.write(fact_check)
-                
-            if suggestion == "Avec suggestions":
-                st.warning("Proposition de titres en cours...")
-                titles_to_add = better_titles(final_text, infos)
-                with st.expander("Titres à réviser", expanded=False):
-                        st.write(titles_to_add)
-        
-            ts_end = perf_counter()
-            st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
+        col1, col2, col3 = st.columns([2, 2,1])
+        col3.download_button(
+            label="Télécharger 💾",
+            data=final_text,
+            file_name='texte.md',
+            mime='text/markdown',
+        )
+        if check == "Avec fact checking":
+            st.error("⚠️ Fact checking en cours...")
+            fact_check = fact_check(final_text)
+            with st.expander("Fact checking", expanded=False):
+                st.write(fact_check)
+            
+        if suggestion == "Avec suggestions":
+            st.warning("Proposition de titres en cours...")
+            titles_to_add = better_titles(final_text, infos)
+            with st.expander("Titres à réviser", expanded=False):
+                    st.write(titles_to_add)
+    
+        ts_end = perf_counter()
+        st.info(f" {round(ts_end - ts_start, 3)} secondes d'exécution")
