@@ -175,25 +175,25 @@ if submit:
         col1, col2, col3 = st.columns([2, 2,1])
         rewrite = col3.button("Réécrire ✍🏻", use_container_width=1)
 
-    if rewrite:
-        st.warning("11c/12 - Rédaction du premier texte...")
-        first_text = writer(st.session_state.get("infos"), title, plan, keywords)
-        with st.expander("Texte brut", expanded=False):
-            st.write(first_text)
+if rewrite:
+    st.warning("11c/12 - Rédaction du premier texte...")
+    first_text = writer(st.session_state.get("infos"), title, plan, keywords)
+    with st.expander("Texte brut", expanded=False):
+        st.write(first_text)
 
-        st.warning("11d/12 - Article en cours de correction...")
-        final_text = first_text + "\n" + completer(first_text, st.session_state.get("infos"), title, plan, keywords)
-        with st.expander("Texte complet", expanded=False):
-            st.write(final_text)
-        st.success("12/12 - Mise en gras du texte...")
-        final_text = bold_keywords(final_text)
-        with st.expander("Texte finalisé", expanded=False):
-            st.write(final_text)
+    st.warning("11d/12 - Article en cours de correction...")
+    final_text = first_text + "\n" + completer(first_text, st.session_state.get("infos"), title, plan, keywords)
+    with st.expander("Texte complet", expanded=False):
+        st.write(final_text)
+    st.success("12/12 - Mise en gras du texte...")
+    final_text = bold_keywords(final_text)
+    with st.expander("Texte finalisé", expanded=False):
+        st.write(final_text)
 
-        col1, col2, col3 = st.columns([2, 2,1])
-        col3.download_button(
-            label="Télécharger 💾",
-            data=final_text,
-            file_name='texte.md',
-            mime='text/markdown',
-        )
+    col1, col2, col3 = st.columns([2, 2,1])
+    col3.download_button(
+        label="Télécharger 💾",
+        data=final_text,
+        file_name='texte.md',
+        mime='text/markdown',
+    )
