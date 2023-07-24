@@ -14,6 +14,6 @@ def better_titles(text, infos):
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
         messages=[{"role": "system", "content": st.session_state.get("title_prompt")},
-                        {"role": "user", "content": "[TEXT : ]\n" + text + "\n [INFOS : ]\n" + infos]}]
+                        {"role": "user", "content": "[TEXT : ]\n" + text + "\n [INFOS : ]\n" + infos}]
     )
     return response["choices"][0]["message"]["content"]
