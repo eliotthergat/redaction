@@ -53,20 +53,19 @@ title_hof = ""
 analyzer_prompt = "#"
 title_prompt = "#"
 writer_prompt = "#"
-match client:
-  case "Médecin":
+if client == "Médecin":
     writer_prompt = medecin_prompt
     analyzer_prompt = medecin_analyzer
     title_prompt = title_medecin
-  case "Éducation":
+elif client == "Éducation":
     writer_prompt = education_prompt
     analyzer_prompt = education_analyzer
     title_prompt = title_education
-  case "HOF":
+elif client == "HOF":
     writer_prompt = hof_prompt
     analyzer_prompt = hof_analyzer
     title_prompt = title_hof
-  case _:
+else:
     writer_prompt = "NE FAIS RIEN"
     analyzer_prompt = "NE FAIS RIEN"
     title_prompt = "NE FAIS RIEN"
