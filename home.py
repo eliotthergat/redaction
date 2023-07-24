@@ -156,17 +156,7 @@ if submit:
             file_name='texte.md',
             mime='text/markdown',
         )
-        if check == "Avec fact checking":
-            st.error("Fact checking en cours...")
-            fact = fact_check(final_text)
-            with st.expander("Fact checking", expanded=False):
-                st.write(fact)
 
-        if suggestion == "Avec suggestions":
-            st.success("Proposition de titres en cours...")
-            suggestion_text = better_titles(final_text, st.session_state.get("infos"))
-            with st.expander("Titres possibles", expanded=False):
-                st.write(suggestion_text)
 
         cost = st.session_state["prompt_tokens"] * 0.00003 + st.session_state["completion_tokens"] * 0.00006
         ts_end = perf_counter()
