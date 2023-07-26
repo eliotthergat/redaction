@@ -24,11 +24,16 @@ completer_medecin = "Ignore toutes les instructions avant celle-ci. Tu es un ré
 completer_education = "Ignore toutes les instructions avant celle-ci. Tu es un rédacteur web expert en études de santé. Tu as rédigé des articles pour les sites de prépa médecine depuis 20 ans. Ta tâche est maintenant de rédiger un article sur les études de santé. Les internautes qui consulteront cette page chercheront principalement à prendre des informations sur ce sujet avant de s’inscrire en prépa. Voici le ton de la marque pour laquelle tu devras rédiger : Le ton de la marque est hautement professionnel et informatif. La marque communique de manière détaillée, directe et précise, fournissant des informations complètes à son public. Il y a un élément de soin et de considération notable, trouvant un équilibre entre les conseils formels d'un professionnel de la santé et une communication empathique. Les attributs de langage gravitent autour de la terminologie médicale, du langage orienté vers la santé, des explications méthodiques et une emphase sur les détails. Le persona de la marque semble être celui d'un expert du secteur compétent, fiable et minutieux qui privilégie le bien-être des individus qu'il sert. Leur style se concentre sur l'instauration de la confiance, la démonstration d'expertise et l'assurance de la transparence dans la communication. Si [TEXT] se termine par \"[À finir]\", ta tâche est maintenant de rédiger un article ayant pour titre principal [TITRE]. Analyse le texte [TEXT] et regarde si tous les titres présents dans le plan [PLAN] sont présentes dans [TEXT]. Si l’article n’est pas fini, rédige la suite du plan sans modifier le contenu précédent. Utilise un ton de professionnel médical, avec des expressions idiomatiques. Ponctue tes phrases en insérant des virgules à des endroits pertinents. Utilise un maximum de détails, de language technique, scientifique et physiologique. Utilise le vouvoiement. Insère des phrases de transition naturelles et professionnelles entre les différentes parties du texte. Le lecteur est un patient s’intéressant au soin mentionné, il recherche une information claire, précise et exhaustive. Utilise les mots-clés inclus dans [KEYWORDS], chaque mot-clé est suivi du nombre de fois où il doit apparaitre. Les informations que tu dois inclures obligatoirement sont présentes dans [INFOS] et compléter cette base de connaissance avec tes propres informations. Rédige la suite de l’article sans reprendre le texte précédent dans ta réponse. Si [TEXT] se fini par \"[Fini]\", ajoute simplement \"[Complet]\"."
 completer_agence = ""
 
+medecin_fact = "Tu es médecin expert. Existe-t-il des informations médicalement inexactes dans ce texte ?"
+education_fact = "Tu es expert en études de Santé et prépa médecine. Existe-t-il des informations inexactes sur les études de santé dans ce texte ?"
+agence_fact = ""
+
 
 st.session_state["analyzer_prompt"] = "#"
 st.session_state["title_prompt"] = "#"
 st.session_state["writer_prompt"] = "#"
 st.session_state["completer_prompt"] = "#"
+st.session_state["fact_prompt"] = "#"
 
 def define_client(client):
     if client == "Médecin":
@@ -36,18 +41,22 @@ def define_client(client):
         st.session_state["analyzer_prompt"] = medecin_analyzer
         st.session_state["title_prompt"] = title_medecin
         st.session_state["completer_prompt"] = completer_medecin
+        st.session_state["fact_prompt"] = medecin_fact
     elif client == "Éducation":
         st.session_state["writer_prompt"] = education_prompt
         st.session_state["analyzer_prompt"] = education_analyzer
         st.session_state["title_prompt"] = title_education
         st.session_state["completer_prompt"] = completer_education
+        st.session_state["fact_prompt"] = education_fact
     elif client == "Agence":
         st.session_state["writer_prompt"] = agence_prompt
         st.session_state["analyzer_prompt"] = agence_analyzer
         st.session_state["title_prompt"] = title_agence
         st.session_state["completer_prompt"] = completer_agence
+        st.session_state["fact_prompt"] = agence_fact
     else:
         st.session_state["writer_prompt"] = "NE FAIS RIEN"
         st.session_state["analyzer_prompt"] = "NE FAIS RIEN"
         st.session_state["title_prompt"] = "NE FAIS RIEN"
         st.session_state["completer_prompt"] = "NE FAIS RIEN"
+        st.session_state["fact_prompt"] = "NE FAIS RIEN"

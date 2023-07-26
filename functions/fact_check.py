@@ -13,7 +13,7 @@ def fact_check(text):
         top_p=1,
         frequency_penalty=st.session_state.get("FREQUENCY_PENALTY"),
         presence_penalty=st.session_state.get("PRESENCE_PENALTY"),
-        messages=[{"role": "system", "content": "Tu es médecin expert. Existe-t-il des informations médicalement inexactes dans ce texte ? "},
+        messages=[{"role": "system", "content": st.session_state.get("fact_prompt")},
                         {"role": "user", "content": "[TEXT : ]\n" + text}]
     )
     st.session_state["total_tokens"] = st.session_state["total_tokens"] + response["usage"]["total_tokens"]
