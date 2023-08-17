@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 COPY . ./
-
+RUN pip install -U pip
 RUN pip3 install -r requirements.txt
 
 EXPOSE 8080
