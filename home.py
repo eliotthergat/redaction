@@ -19,11 +19,15 @@ from functions.bolder_keywords import bold_keywords
 from functions.better_titles import better_titles
 from functions.fact_check import fact_check
 from functions.completer import completer
+from PIL import Image
 
+
+image = Image.open("assets/favicon.png")
 st.set_page_config(
     page_title="Khontenu",
-    page_icon="🧠",
+    page_icon=image,
 )
+
 
 
 st.header("🧠 Khontenu")
