@@ -21,15 +21,15 @@ def sidebar():
         api_key_input = st.text_input(
             "OpenAI API Key",
             type="password",
-            placeholder="Paste your OpenAI API key here",
-            help="Needed to use the OpenAI API",
+            placeholder="Collez votre clé OpenAI ici",
+            help="Nécessaire pour utiliser l'API",
             value=os.environ.get("OPENAI_API_KEY", None)
             or st.session_state.get("OPENAI_API_KEY", ""),
         )
         st.session_state["OPENAI_API_KEY"] = api_key_input
         st.markdown("---")
         st.markdown("# Paramètres")
-        max_tokens = st.slider("Longueur maximale (`max_tokens`):", min_value=1, max_value=8000, value=st.session_state.get("MAX_TOKENS", 2048), step=25, help="Maximum number of tokens to consume")
+        max_tokens = st.slider("Longueur maximale (`max_tokens`):", min_value=1, max_value=8000, value=st.session_state.get("MAX_TOKENS", 2048), step=25, help="Nombre maximum de tokens à utiliser")
         st.session_state["MAX_TOKENS"] = max_tokens
         
         temperature = st.slider("Température (`randomness`):", min_value=0.0, max_value=2.0, value=st.session_state.get("TEMPERATURE", 1.0), step=0.1, help="###")
