@@ -59,7 +59,7 @@ def define_client(client):
         st.session_state["title_prompt"] = title_agence
         st.session_state["completer_prompt"] = completer_agence
         st.session_state["fact_prompt"] = agence_fact
-     elif client == "Dentiste":
+    elif client == "Dentiste":
         st.session_state["writer_prompt"] = dentiste_prompt
         st.session_state["analyzer_prompt"] = dentiste_analyzer
         st.session_state["title_prompt"] = dentiste_agence
