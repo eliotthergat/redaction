@@ -25,8 +25,8 @@ def markdown_generator(text):
             st.session_state["prompt_tokens"] = st.session_state["prompt_tokens"] + response["usage"]['prompt_tokens']
             return response["choices"][0]["message"]["content"]
             break
-        except openai.error.Timeout as e:
 
+        except openai.error.Timeout as e:
             if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
                 st.write(f"OpenAI API request timed out: {e}, retrying...")
                 time.sleep(st.session_state["wait_time"])
@@ -34,9 +34,43 @@ def markdown_generator(text):
                 st.write("Max retries reached. Aborting.")
 
         except openai.error.APIError as e:
-            
             if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
                 st.write(f"OpenAI API returned an API Error: {e}, retrying...")
+                time.sleep(st.session_state["wait_time"])
+            else:
+                st.write("Max retries reached. Aborting.")
+        
+        except openai.error.APIConnectionError as e:
+            if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
+                st.write(f"OpenAI API request failed to connect: {e}, retrying...")
+                time.sleep(st.session_state["wait_time"])
+            else:
+                st.write("Max retries reached. Aborting.")
+        
+        except openai.error.InvalidRequestError as e:
+            if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
+                st.write(f"OpenAI API request was invalid: {e}, retrying...")
+                time.sleep(st.session_state["wait_time"])
+            else:
+                st.write("Max retries reached. Aborting.")
+
+        except openai.error.AuthenticationError as e:
+            if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
+                st.write(f"OpenAI API request was not authorized: {e}, retrying...")
+                time.sleep(st.session_state["wait_time"])
+            else:
+                st.write("Max retries reached. Aborting. Please change your OpenAI key.")
+        
+        except openai.error.PermissionError as e:
+            if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
+                st.write(f"OpenAI API request was not permitted: {e}, retrying...")
+                time.sleep(st.session_state["wait_time"])
+            else:
+                st.write("Max retries reached. Aborting.")
+        
+        except openai.error.RateLimitError as e:
+            if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
+                st.write(f"OpenAI API request exceeded rate limit: {e}, retrying...")
                 time.sleep(st.session_state["wait_time"])
             else:
                 st.write("Max retries reached. Aborting.")
