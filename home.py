@@ -20,6 +20,7 @@ from functions.better_titles import better_titles
 from functions.fact_check import fact_check
 from functions.completer import completer
 from PIL import Image
+import time
 
 
 image = Image.open("assets/favicon.png")
@@ -37,6 +38,9 @@ if "shared" not in st.session_state:
    st.session_state["shared"] = True
 
 sidebar()
+
+st.session_state["max_retries"] = 3
+st.session_state["wait_time"] = 5
 
 openai.api_key = st.session_state.get("OPENAI_API_KEY")
 
