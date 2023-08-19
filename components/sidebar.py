@@ -41,6 +41,12 @@ def sidebar():
         frequency_penalty = st.slider("Pénalité de fréquence (`frequency_penalty`):", min_value=0.0, max_value=2.0, value=st.session_state.get("FREQUENCY_PENALTY", 0.0), step=0.01, help="###")
         st.session_state["FREQUENCY_PENALTY"] = frequency_penalty
 
+        max_retries = st.slider("Nombre d'essais (`max_retries`):", min_value=1, max_value=5, value=st.session_state.get("max_retries", 3), step=1, help="Nombre de tentatives en cas d'erreur de l'API")
+        st.session_state["max_retries"] = max_retries
+
+        wait_time = st.slider("Temps d'attente (`wait_time`):", min_value=1, max_value=20, value=st.session_state.get("wait_time", 5), step=1, help="Attente en secondes avant un nouvel appel API")
+        st.session_state["wait_time"] = wait_time
+
         st.markdown("---")
         st.markdown("# À propos")
         url = "https://khlinic.fr"

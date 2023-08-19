@@ -39,9 +39,6 @@ if "shared" not in st.session_state:
 
 sidebar()
 
-st.session_state["max_retries"] = 3
-st.session_state["wait_time"] = 5
-
 openai.api_key = st.session_state.get("OPENAI_API_KEY")
 
 st.markdown("### Rédigeons de meilleures pages que les concurrents 👀")
