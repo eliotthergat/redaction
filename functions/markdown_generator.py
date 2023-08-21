@@ -32,6 +32,7 @@ def markdown_generator(text):
                 time.sleep(st.session_state["wait_time"])
             else:
                 st.write("Max retries reached. Aborting.")
+                st.session_state["error"] = 1
 
         except openai.error.APIError as e:
             if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
@@ -39,6 +40,7 @@ def markdown_generator(text):
                 time.sleep(st.session_state["wait_time"])
             else:
                 st.write("Max retries reached. Aborting.")
+                st.session_state["error"] = 1
         
         except openai.error.APIConnectionError as e:
             if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
@@ -46,6 +48,7 @@ def markdown_generator(text):
                 time.sleep(st.session_state["wait_time"])
             else:
                 st.write("Max retries reached. Aborting.")
+                st.session_state["error"] = 1
         
         except openai.error.InvalidRequestError as e:
             if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
@@ -53,6 +56,7 @@ def markdown_generator(text):
                 time.sleep(st.session_state["wait_time"])
             else:
                 st.write("Max retries reached. Aborting.")
+                st.session_state["error"] = 1
 
         except openai.error.AuthenticationError as e:
             if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
@@ -60,6 +64,7 @@ def markdown_generator(text):
                 time.sleep(st.session_state["wait_time"])
             else:
                 st.write("Max retries reached. Aborting. Please change your OpenAI key.")
+                st.session_state["error"] = 1
         
         except openai.error.PermissionError as e:
             if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
@@ -67,6 +72,7 @@ def markdown_generator(text):
                 time.sleep(st.session_state["wait_time"])
             else:
                 st.write("Max retries reached. Aborting.")
+                st.session_state["error"] = 1
         
         except openai.error.RateLimitError as e:
             if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
@@ -74,3 +80,4 @@ def markdown_generator(text):
                 time.sleep(st.session_state["wait_time"])
             else:
                 st.write("Max retries reached. Aborting.")
+                st.session_state["error"] = 1
