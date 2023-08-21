@@ -62,6 +62,7 @@ def markdown_generator(text):
                 st.write(f"OpenAI API request was not authorized: {e}, retrying...")
                 st.write("Please change your OpenAI key.")
                 st.session_state["error"] = 1
+                pass
         
         except openai.error.PermissionError as e:
             if attempt < st.session_state["max_retries"] - 1:  # ne pas attendre après la dernière tentative 
