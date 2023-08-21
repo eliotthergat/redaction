@@ -27,6 +27,9 @@ image = Image.open("assets/favicon.png")
 st.set_page_config(
     page_title="Khontenu",
     page_icon=image,
+    menu_items={
+        'Besoin d\'aide ?': 'mailto:eliott@khlinic.fr'
+    }
 )
 
 
