@@ -29,7 +29,7 @@ st.set_page_config(
     page_icon=image,
     layout="wide",
     menu_items={
-        'Besoin d\'aide ?': 'mailto:eliott@khlinic.fr'
+        'Get help': 'mailto:eliott@khlinic.fr'
     }
 )
 
