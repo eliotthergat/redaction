@@ -177,6 +177,16 @@ if submit:
             final_text = first_text + "\n" + completer(first_text, st.session_state.get("infos"), title, plan, keywords)
             with st.expander("Texte complet", expanded=False):
                 st.write(final_text)
+
+        if st.session_state["error"] == 0:
+
+            st.warning("11c/12 - Article en cours de finalisation...")
+            final_text = final_text + "\n" + completer(final_text, st.session_state.get("infos"), title, plan, keywords)
+            with st.expander("Texte complet", expanded=False):
+                st.write(final_text)
+
+        if st.session_state["error"] == 0:
+
             st.success("12/12 - Mise en gras du texte...")
             final_text = bold_keywords(final_text)
             with st.expander("Texte finalisé", expanded=False):

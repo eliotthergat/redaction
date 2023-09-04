@@ -5,3 +5,4 @@ beautifulsoup4
 markdownify
 streamlit_pills
 trafilatura
+time
