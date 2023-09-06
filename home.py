@@ -68,7 +68,7 @@ with st.expander("Plan de contenu", expanded=False):
     keywords = st.text_area("Mots-clés", placeholder="Les mots-clés à utiliser")
 
 
-client = pills("", ["Médecin", "Dentiste", "Éducation", "Agence"], ["🩺","🦷", "👨🏻‍🏫", "💸"])
+client = pills("", ["Médecin", "Dentiste", "Somnology", "Éducation", "Agence"], ["🩺","🦷","🌙", "👨🏻‍🏫", "💸"])
 col1, col2, col3 = st.columns([2, 2,1])
 submit = col3.button("Rédiger ✍🏻", use_container_width=1)
     
