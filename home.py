@@ -20,7 +20,6 @@ from functions.better_titles import better_titles
 from functions.fact_check import fact_check
 from functions.completer import completer
 from PIL import Image
-import time
 
 
 image = Image.open("assets/favicon.png")
