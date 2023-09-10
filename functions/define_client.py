@@ -71,7 +71,7 @@ def define_client(client):
         st.session_state["completer_prompt"] = title_dentiste
         st.session_state["fact_prompt"] = dentiste_fact
 
-    elif client == "Somnology":
+    elif client == "Sommeil":
         st.session_state["writer_prompt"] = somnology_prompt
         st.session_state["analyzer_prompt"] = somnology_analyzer
         st.session_state["title_prompt"] = somnology_agence
