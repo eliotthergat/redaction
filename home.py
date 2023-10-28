@@ -53,7 +53,7 @@ with col1:
 with col2:
     check = pills("", ["Avec fact checking", "Sans fact checking"], ["✅", "🚨"])
 
-with st.expander("Concurrence", expanded=False):
+with st.expander("Concurrence", expanded=True):
     link_1 = st.text_input("Concurrent n°1", placeholder="Lien")
     link_2 = st.text_input("Concurrent n°2", placeholder="Lien")
     link_3 = st.text_input("Concurrent n°3", placeholder="Lien")
